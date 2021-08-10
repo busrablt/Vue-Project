@@ -4,22 +4,26 @@
       app
       color="white"
       flat
+      
     >
-      <v-container class="py-0 fill-height">
-        <v-avatar
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
-
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          text
-        >
-          {{ link }}
-        </v-btn>
-        <v-spacer></v-spacer>
+      <v-container class="py-0 fill-height header__sheet" >
+        <v-avatars class="header__avatar">
+          <v-avatar
+            class="mr-10"
+            color="grey darken-1"
+            size="32"
+          ></v-avatar>
+        </v-avatars>
+        <v-btns class="header__btn">
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            text
+          >
+            {{ link }}
+          </v-btn>
+        </v-btns>
+       
       </v-container>
     </v-app-bar>
 
@@ -43,13 +47,12 @@
 import Sidebar from "./components/Sidebar.vue"
 import Home from "./views/Home.vue"
 
+
 export default {
   
   name: 'App',
   data: () => ({
       links: [ 
-        'Dashboard',
-        'Messages',
         'Profile',
         'Updates',
       ],
@@ -58,6 +61,7 @@ export default {
     components:{
         Sidebar,
         Home,
+
         
         
     }
@@ -67,4 +71,11 @@ export default {
 </script>
 <style lang="scss">
 
+  .header
+  {
+    &__sheet{
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
 </style>

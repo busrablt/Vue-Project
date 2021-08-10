@@ -1,9 +1,9 @@
 <template>
   <v-sheet
-    min-height="90vh"
+    min-height="100vh"
     rounded="lg"
-    
   >
+ 
     <router-view/>
   </v-sheet>   
 </template>
@@ -16,6 +16,7 @@
      
     }),
     components:{
+
        
         
         

@@ -42,6 +42,7 @@ export default {
 <style lang="scss">
  .card{
   display: flex;
+  flex-direction: column;
   width: 280px;
   cursor: pointer;
   margin-bottom: 15px;

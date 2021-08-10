@@ -1,29 +1,30 @@
 <template>
-  <v-sheet rounded="lg" height="90vh">
-    <v-list color="transparent">
-      <v-list-item 
+  <v-sheet rounded="lg" height="100vh" class="menu">
+    <v-list color="transparent" class="menu__element">
+      <div class="menu__list-item">
+      <v-list-item
         v-for="(item, index) in subMenuItems"
         :key="index"
         link
       >
       <v-list-item-content > 
-        <router-link :to="item.route" class="router" >  
-          <v-list-item-title class="item-title">
+        <router-link :to="item.route" class="menu__router" >  
+          <v-list-item-title class="menu__item-title">
             <v-icon >{{ item.icon }}</v-icon> {{ item.name }}
           </v-list-item-title>
         </router-link>
       </v-list-item-content>
       </v-list-item>
-      
-      <div class="list-item">
+      </div>
+      <div class="menu__list-item">
         <v-list-item
         v-for="(item, index) in buttomMenuItems"
         :key="index"
         link
         >
         <v-list-item-content>
-          <router-link :to="item.route" class="router" > 
-            <v-list-item-title class="item-title">
+          <router-link :to="item.route" class="menu__router" > 
+            <v-list-item-title class="menu__item-title">
               <v-icon>{{ item.icon }}</v-icon> {{ item.name }}
             </v-list-item-title>
           </router-link>
@@ -57,18 +58,22 @@ export default {
 </script>
 
 <style lang="scss">
-.list-item{
-    margin-top: 240px; 
-  
-}
+.menu{
 
-.router{
-  text-decoration: none;
+  &__element{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  &__router{
+    text-decoration: none;
+
+  }
+  &__item-title{
+    color: black;
+  }
 
 }
-.item-title{
-  color: black;
-}
-
 
 </style>

@@ -33,6 +33,9 @@ export default {
 }
 </script>
 <style lang="scss" >
+h4{
+  padding-left: 8px;
+}
 .board{
   display: flex;
   flex-direction: column;

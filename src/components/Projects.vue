@@ -1,6 +1,7 @@
 <template>
  <div>
-   <h1>Projects</h1>
+   <search />
+   <h2>Projects</h2>
   <main class="flexbox">
     <Board id="board-1" :boardTitle=titles[0]   @getBoardTitle="addCard($event, {title: 'Başlık', text: 'Text'})" >
       <Card v-for="(item, index) in todoCards" :key="index" :id="item.id" draggable="true"/>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import Search from "./Search.vue"
 import Card from "./Card.vue"
 import Board from "./Board.vue"
 export default {
@@ -31,7 +33,8 @@ export default {
   }),
   components:{
     Board,
-    Card
+    Card,
+    Search,
   },
   methods:{
     addCard(boardName, data) {
@@ -51,11 +54,14 @@ export default {
 </script>
 
 <style lang="scss" >
+h2{
+  padding: 15px;
+}
+
 .flexbox{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
   overflow: hidden;
   margin-right: 0 auto;
   padding: 15px;
