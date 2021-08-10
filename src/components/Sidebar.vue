@@ -62,7 +62,7 @@ export default {
 .menu{
 
   &__elements{
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
