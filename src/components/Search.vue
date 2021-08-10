@@ -6,7 +6,9 @@
       >
         <v-toolbar flat>
           <v-toolbar-title class="grey--text">
-            Search
+            <form >
+              <input type="text" placeholder="Search" >
+            </form>
           </v-toolbar-title>
   
           <v-btn icon>
@@ -22,11 +24,18 @@
 
 <style lang="scss">
 .v-toolbar{
+  box-shadow: none;
   &__content{
     justify-content: space-between;
   }
   &__search{
-   
+    box-shadow: none;
+    input{
+      min-width: 100vh; 
+      &:focus{
+        outline: none;
+      }
+    }
   }
 }
 </style>

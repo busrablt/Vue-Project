@@ -1,37 +1,38 @@
 <template>
   <v-sheet rounded="lg" height="100vh" class="menu">
-    <v-list color="transparent" class="menu__element">
-      <div class="menu__list-item">
-      <v-list-item
-        v-for="(item, index) in subMenuItems"
-        :key="index"
-        link
-      >
-      <v-list-item-content > 
-        <router-link :to="item.route" class="menu__router" >  
-          <v-list-item-title class="menu__item-title">
-            <v-icon >{{ item.icon }}</v-icon> {{ item.name }}
-          </v-list-item-title>
-        </router-link>
-      </v-list-item-content>
-      </v-list-item>
-      </div>
-      <div class="menu__list-item">
+    <v-list color="transparent">
+      <div class="menu__elements">
+        <div class="menu__list-item">
         <v-list-item
-        v-for="(item, index) in buttomMenuItems"
-        :key="index"
-        link
+          v-for="(item, index) in subMenuItems"
+          :key="index"
+          link
         >
-        <v-list-item-content>
-          <router-link :to="item.route" class="menu__router" > 
+        <v-list-item-content > 
+          <router-link :to="item.route" class="menu__router" >  
             <v-list-item-title class="menu__item-title">
-              <v-icon>{{ item.icon }}</v-icon> {{ item.name }}
+              <v-icon >{{ item.icon }}</v-icon> {{ item.name }}
             </v-list-item-title>
           </router-link>
         </v-list-item-content>
         </v-list-item>
-     </div>
-    
+        </div>
+        <div class="menu__list-item">
+          <v-list-item
+          v-for="(item, index) in buttomMenuItems"
+          :key="index"
+          link
+          >
+          <v-list-item-content>
+            <router-link :to="item.route" class="menu__router" > 
+              <v-list-item-title class="menu__item-title">
+                <v-icon>{{ item.icon }}</v-icon> {{ item.name }}
+              </v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+          </v-list-item>
+      </div>
+    </div>
     </v-list>
   </v-sheet>
 </template>
@@ -60,10 +61,12 @@ export default {
 <style lang="scss">
 .menu{
 
-  &__element{
+  &__elements{
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding:10px;
   }
 
   &__router{
