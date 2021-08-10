@@ -7,14 +7,14 @@
       
     >
       <v-container class="py-0 fill-height header__sheet" >
-        <v-avatars class="header__avatar">
+        <div class="header__avatar">
           <v-avatar
             class="mr-10"
             color="grey darken-1"
             size="32"
           ></v-avatar>
-        </v-avatars>
-        <v-btns class="header__btn">
+        </div>
+        <div class="header__btn">
           <v-btn
             v-for="link in links"
             :key="link"
@@ -22,7 +22,7 @@
           >
             {{ link }}
           </v-btn>
-        </v-btns>
+        </div>
        
       </v-container>
     </v-app-bar>
