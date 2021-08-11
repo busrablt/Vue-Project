@@ -30,9 +30,12 @@
 export default {
     name:"Card",
     props:['id','draggable'],
+    created() {
+      console.log(this.id)
+    },
     methods:{
        dragStart: e=>{
-         const target = e.target ;
+         const target = e.target;
          e.dataTransfer.setData('card_id', target.id) ;
          setTimeout(() => {target.style.display= "none" }, 0);
         }},
