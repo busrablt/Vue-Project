@@ -1,15 +1,23 @@
 <template>
  <div>
    <search/>
-
-   <h2>Projects</h2>
+   <v-list
+       style="max-height: 500px"
+       class="overflow-y-auto"
+    > 
+   <h2>Projects</h2> 
+   
   <main class="flexbox">
+    
+   
     <Board id="board-1" :boardTitle=titles[0] :lastId="lastId" @updateLastId="lastId = $event"/>
   
     <Board id="board-2"  :boardTitle=titles[1]  :lastId="lastId" @updateLastId="lastId = $event"/>
 
     <Board id="board-3" :boardTitle=titles[2] :lastId="lastId" @updateLastId="lastId = $event"/> 
+    
   </main>
+ </v-list>
  </div>
 </template>
 
