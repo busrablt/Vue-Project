@@ -1,8 +1,12 @@
 <template>
  <div>
    <search/>
-
+  <v-list
+        style="max-height: 520px"
+        class="overflow-y-auto"
+    >
    <h2>Projects</h2>
+  
   <main class="flexbox">
     <Board id="board-1" :boardTitle=titles[0] 
      :lastId="lastId"
@@ -25,6 +29,7 @@
      @findSourceBoard="sourceBoard = $event"
     /> 
   </main>
+   </v-list>
  </div>
 </template>
 
