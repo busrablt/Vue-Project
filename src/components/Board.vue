@@ -3,7 +3,7 @@
        class="board"
        @dragover.prevent
        @drop.prevent ="drop">
-       <h4 class="mt-2">{{boardTitle}}</h4>
+       <h4 class="mt-2">{{boardTitle}} {{cardCount}}</h4>
 
       <div  class="sheet">
         <v-icon  @click="getBoardTitle">
@@ -18,13 +18,25 @@
 <script>
 export default {
     name:"Board",
-    props:['id','boardTitle'],
+    props: {
+      id: String,
+      boardTitle: String,
+      cardCount: Number
+    },
+    data: () => ({
+      cardInfos: []
+      
+    }),
     methods:{
-      drop: e => {
-        const card_id = e.dataTransfer.getData('card_id');
-        const card = document.getElementById(card_id);
-        card.style.display ="block";
-        e.target.appendChild(card);
+      drop(e) {
+        var cardInfo = JSON.parse(e.dataTransfer.getData('card_info'))
+        this.cardInfos.push(cardInfo)
+        const card_id = cardInfo.id
+        const card = document.getElementById(card_id)
+        card.style.display = "block"
+        e.target.appendChild(card)
+        this.$emit("transferedCardID", card_id)
+
       },
       getBoardTitle() {
         this.$emit("getBoardTitle", this.boardTitle)

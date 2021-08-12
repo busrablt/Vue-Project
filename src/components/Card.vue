@@ -1,15 +1,19 @@
 <template>
   <div>
     <v-card
-        :id="id"
+        :id="info.id"
         class="card"
         :draggable="draggable" 
         @dragstart="dragStart"
         @dragover.stop>
 
         <v-card-text class="card-text">
-           <h3>Development<v-icon class="icon">mdi-paperclip</v-icon></h3>
+           <h3><input placeholder="Title"/> <v-icon class="icon">mdi-paperclip</v-icon> </h3>   
         </v-card-text>
+        <v-card-text class="card-text">
+           <input placeholder="Text"/>   
+        </v-card-text>
+
 
         <v-card-actions>
             <v-btn
@@ -29,13 +33,18 @@
 <script>
 export default {
     name:"Card",
-    props:['id','draggable'],
+    props:['draggable', 'info'],
+    created() {
+      console.log(this.info.id)
+    },
     methods:{
-       dragStart: e=>{
-         const target = e.target ;
-         e.dataTransfer.setData('card_id', target.id) ;
-         setTimeout(() => {target.style.display= "none" }, 0);
-        }},
+      dragStart(e) {
+        const target = e.target
+        var stringInfo = JSON.stringify(this.info)
+        e.dataTransfer.setData('card_info', stringInfo)
+        setTimeout(() => {target.style.display= "none" }, 0)
+      }
+    },
   
 }
 </script>
@@ -47,7 +56,6 @@ export default {
   cursor: pointer;
   margin-bottom: 15px;
 }
-.icon{
-  margin-left: 80px;
-}
+
+
 </style>
