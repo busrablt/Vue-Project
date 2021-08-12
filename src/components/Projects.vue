@@ -4,16 +4,17 @@
 
    <h2>Projects</h2>
   <main class="flexbox">
-    <Board id="board-1" @transferedCardID="changeLocation($event, todoCards)" :boardTitle=titles[0] :cardCount=todoCards.length  @getBoardTitle="addCard($event, {title: 'Başlık', text: 'Text'})" >
-      <Card v-for="(item, index) in todoCards" :key="index" :id="item.id" draggable="true"/>
+    <Board id="board-1" @transferedCardID="changeLocation($event, todoCards)" :boardTitle=titles[0] 
+    :cardCount=todoCards.length  @getBoardTitle="addCard($event, {title: 'Başlık', text: 'Text'})" >
+      <Card v-for="(item, index) in todoCards" :key="index" :info="item" draggable="true"/>
     </Board>
   
     <Board id="board-2"  @transferedCardID="changeLocation($event, inProgressCards)" :boardTitle=titles[1] :cardCount=inProgressCards.length @getBoardTitle="addCard($event, {title: 'Başlık', text: 'Text'})">
-      <Card v-for="(item, index) in inProgressCards" :key="index" :id="item.id" draggable="true"/>
+      <Card v-for="(item, index) in inProgressCards" :key="index" :info="item" draggable="true"/>
     </Board>
 
     <Board id="board-3" @transferedCardID="changeLocation($event, completedCards)" :boardTitle=titles[2] :cardCount=completedCards.length @getBoardTitle="addCard($event, {title: 'Başlık', text: 'Text'})"> 
-      <Card v-for="(item, index) in completedCards" :key="index" :id="item.id" draggable="true"/>
+      <Card v-for="(item, index) in completedCards" :key="index" :info="item" draggable="true"/>
     </Board>
   </main>
  </div>
@@ -39,15 +40,13 @@ export default {
   },
   methods:{
     changeLocation(cardId, cardInfoArray) {
-      let findFunction = (info) => {
-         if (cardId ==info.id) 
-           return true
-        }
+      let findFunction = (info) => cardId == info.id 
       var selectedInfo 
       // Seçilen info'nun nereden geldiğini anlamak için if'lerle kontrol ediyoruz
       if(this.todoCards.length != 0) {
+        // FIXME Find yerine filter kullandığımızda card içerisindeki console.log(id) undefined dönüyor
         selectedInfo = this.todoCards.find(findFunction) // Aradığımız id'deki objeyi bulduktan sonra bunu değişkene atıyoruz
-        this.todoCards.splice(this.todoCards.indexOf(selectedInfo), 1) // kaynak diziden seçtiğimiz elementin endeksini bulup siliyoruz
+        this.todoCards.splice(this.todoCards.findIndex((element) => element == selectedInfo), 1) // kaynak diziden seçtiğimiz elementin endeksini bulup siliyoruz
       }
       if(this.completedCards.length != 0) {
         selectedInfo = this.completedCards.find(findFunction)

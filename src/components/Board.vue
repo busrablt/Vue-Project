@@ -23,15 +23,18 @@ export default {
       boardTitle: String,
       cardCount: Number
     },
-    data: (instance) => ({
-      currentId: instance.id
+    data: () => ({
+      cardInfos: []
+      
     }),
     methods:{
       drop(e) {
-        const card_id = e.dataTransfer.getData('card_id');
-        const card = document.getElementById(card_id);
-        card.style.display = "block";
-        e.target.appendChild(card);
+        var cardInfo = JSON.parse(e.dataTransfer.getData('card_info'))
+        this.cardInfos.push(cardInfo)
+        const card_id = cardInfo.id
+        const card = document.getElementById(card_id)
+        card.style.display = "block"
+        e.target.appendChild(card)
         this.$emit("transferedCardID", card_id)
 
       },
