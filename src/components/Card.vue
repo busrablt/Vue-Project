@@ -25,8 +25,6 @@
         </v-card-actions>
     </v-card>
 
-    <slot/>
-
   </div>
 </template>
 
@@ -34,13 +32,11 @@
 export default {
     name:"Card",
     props:['draggable', 'info'],
-    created() {
-      console.log(this.info.id)
-    },
     methods:{
       dragStart(e) {
         const target = e.target
         var stringInfo = JSON.stringify(this.info)
+        e.dataTransfer.setData('source_board_id', this.$parent.id)
         e.dataTransfer.setData('card_info', stringInfo)
         setTimeout(() => {target.style.display= "none" }, 0)
       }

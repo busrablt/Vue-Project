@@ -3,25 +3,32 @@
        class="board"
        @dragover.prevent
        @drop.prevent ="drop">
-       <h4 class="mt-2">{{boardTitle}} {{cardCount}}</h4>
+       <h4 class="mt-2">{{boardTitle}} {{cardInfos.length}}</h4>
 
       <div  class="sheet">
-        <v-icon  @click="getBoardTitle">
+        <v-icon  @click="addCardInfo({id:lastId,  title: 'Başlık', text: 'Text'})">
         mdi-plus-thick</v-icon> 
       </div>
 
-       <slot/>
+      <Card v-for="info in cardInfos" :key="info.id" :info="info" draggable="true"/>
+      
 
   </div>
 </template>
 
 <script>
+import Card from "./Card.vue"
+
+
 export default {
     name:"Board",
+    components:{
+    Card
+    },
     props: {
       id: String,
       boardTitle: String,
-      cardCount: Number
+      lastId: Number
     },
     data: () => ({
       cardInfos: []
@@ -29,7 +36,9 @@ export default {
     }),
     methods:{
       drop(e) {
-        var cardInfo = JSON.parse(e.dataTransfer.getData('card_info'))
+        const cardInfo = JSON.parse(e.dataTransfer.getData('card_info'))
+        //const sourceBoardID = e.dataTransfer.getData('source_board_id')
+        // TODO boardId'yi aldıktan sonra, o board'un içindeki removeInfo fonksiyonunu çalıştır
         this.cardInfos.push(cardInfo)
         const card_id = cardInfo.id
         const card = document.getElementById(card_id)
@@ -38,8 +47,15 @@ export default {
         this.$emit("transferedCardID", card_id)
 
       },
-      getBoardTitle() {
-        this.$emit("getBoardTitle", this.boardTitle)
+      removeInfo(cardId) {
+       let findFunction = (info) => cardId == info.id 
+        let selectedInfo = this.todoCards.find(findFunction)
+        this.todoCards.splice(this.todoCards.findIndex((element) => element == selectedInfo), 1)
+      },
+      addCardInfo(data) {
+        let newData = {id: this.lastId, title: data.title, text: data.text}
+        this.$emit("updateLastId", this.lastId + 1)
+        this.cardInfos.push(newData)
       }
     }
 }
