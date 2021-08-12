@@ -1,11 +1,8 @@
 <template>
-    <v-card flat>
-      <v-card
-        class="mx-auto v-toolbar__search"
-        max-width="1000"
-      >
+   
+      <div class="v-toolbar__search">
         <v-toolbar flat>
-          <v-toolbar-title class="grey--text">
+          <v-toolbar-title>
             <form >
               <input type="text" placeholder="Search" >
             </form>
@@ -15,8 +12,7 @@
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </v-toolbar>
-    </v-card>
-    </v-card>
+      </div>
 
 
 </template>
@@ -24,14 +20,19 @@
 
 <style lang="scss">
 .v-toolbar{
-  box-shadow: none;
   &__content{
     justify-content: space-between;
+    border-bottom: 0.5px solid #ccc;
+
   }
   &__search{
+    
     box-shadow: none;
+    
+    
     input{
-      min-width: 100vh; 
+      min-width: 50vh; 
+      
       &:focus{
         outline: none;
       }

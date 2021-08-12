@@ -70,6 +70,7 @@ h4{
   background:rgba(201, 201, 241, 0.1);
   width: 100%;
   max-width: 250px;
+  min-height: 40vh;
  
 }
 .sheet{
