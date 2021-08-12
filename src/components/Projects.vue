@@ -4,11 +4,26 @@
 
    <h2>Projects</h2>
   <main class="flexbox">
-    <Board id="board-1" :boardTitle=titles[0] :lastId="lastId" @updateLastId="lastId = $event"/>
+    <Board id="board-1" :boardTitle=titles[0] 
+     :lastId="lastId"
+      @updateLastId="lastId = $event"
+     :sourceBoardId="sourceBoard" 
+     @findSourceBoard="sourceBoard = $event"
+     />
   
-    <Board id="board-2"  :boardTitle=titles[1]  :lastId="lastId" @updateLastId="lastId = $event"/>
+    <Board id="board-2" :boardTitle=titles[1]  
+     :lastId="lastId"
+     @updateLastId="lastId = $event"
+     :sourceBoardId="sourceBoard"
+      @findSourceBoard="sourceBoard = $event"  
+      />
 
-    <Board id="board-3" :boardTitle=titles[2] :lastId="lastId" @updateLastId="lastId = $event"/> 
+    <Board id="board-3" :boardTitle=titles[2] 
+     :lastId="lastId"
+      @updateLastId="lastId = $event"
+     :sourceBoardId="sourceBoard"  
+     @findSourceBoard="sourceBoard = $event"
+    /> 
   </main>
  </div>
 </template>
@@ -21,7 +36,8 @@ export default {
   name:"Projects",
   data: () => ({
     lastId: 0,
-    titles: ["To Do", "In Progress", "Completed"]
+    titles: ["To Do", "In Progress", "Completed"],
+    sourceBoard: ""
   }),
   components:{
     Board,

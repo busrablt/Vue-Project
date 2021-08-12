@@ -8,10 +8,10 @@
         @dragover.stop>
 
         <v-card-text class="card-text">
-           <h3><input placeholder="Title"/> <v-icon class="icon">mdi-paperclip</v-icon> </h3>   
+           <h3><input :placeholder="info.title"/> <v-icon class="icon">mdi-paperclip</v-icon> </h3>   
         </v-card-text>
         <v-card-text class="card-text">
-           <input placeholder="Text"/>   
+           <input :placeholder="info.text"/>   
         </v-card-text>
 
 
