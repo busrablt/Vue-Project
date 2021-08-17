@@ -7,12 +7,12 @@
           <v-card elevation="4" light tag="section">
             <v-card-text>
               <p>Sign in with your username and password:</p>
-              <v-form>
+              <v-form @submit.prevent="login()" >
                 <v-text-field
                               outline
-                              label="Username"
+                              label="Email"
                               type="text"
-                              v-model="username"></v-text-field>
+                              v-model="email"></v-text-field>
                 <v-text-field
                               outline
                               hide-details
@@ -24,17 +24,18 @@
                                 :label="'Remember Me'"
                             >
                             </v-checkbox>
+                            <v-card-actions >
+                            <v-btn color="info" >
+                                Forgot password?
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn color="info" type="submit">
+                                Login
+                            </v-btn>
+                            </v-card-actions>
               </v-form>
             </v-card-text>
-            <v-card-actions >
-              <v-btn color="info" flat>
-                Forgot password?
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn color="info" >
-                Login
-              </v-btn>
-            </v-card-actions>
+            
           </v-card>
         </v-flex>
       </v-layout>
@@ -44,12 +45,28 @@
 </template>
 
 <script>
+import firebase from "firebase/app"
+import "firebase/auth"
 export default {
+  methods:{
+    async login(){
+      try {
+        const val = await firebase.auth().signInWithEmailAndPassword(this.email , this.password)
+        console.log(val)
+        this.$router.replace({name:"/"})
+        
+      } catch (err) {
+        console.log(err)
+      }
+
+      
+    }
+  },
    data () {
     return {
       checkbox: false,
-      password: null,
-      username: null
+      password: "",
+      email: ""
     }
   }
 }
