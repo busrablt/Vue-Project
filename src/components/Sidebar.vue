@@ -50,7 +50,7 @@ export default {
       ],
       buttomMenuItems:[
         {icon: "mdi-cog-outline", name: "Settings", route:"/"}, 
-        {icon: "mdi-logout", name: "Log Out", route:"/"}  
+        {icon: "mdi-logout", name: "Log Out", route:"/signin"}  
       ]
     })
     
