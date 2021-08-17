@@ -2,6 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signin from "../components/Signin.vue"
+import Stats from "../components/Stats.vue"
+import Projects from "../components/Projects.vue"
+import Register from "../components/Register.vue"
+import Calendar from "../components/Calendar"
+
+
 
 Vue.use(VueRouter);
 
@@ -12,6 +18,11 @@ const routes = [
     component: Home,
   },
   {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
     path: "/signin",
     name: "Signin",
     component: Signin,
@@ -19,20 +30,17 @@ const routes = [
   {
     path: "/stats",
     name: "Stats",
-    component: () =>
-      import("../components/Stats.vue"),
+    component:Stats,
   },
   {
     path: "/projects",
     name: "Projects",
-    component: () =>
-      import("../components/Projects.vue"),
+    component:Projects,
   },
   {
     path: "/calendar",
     name: "Calander",
-    component: () =>
-      import("../components/Calendar.vue"),
+    component: Calendar,
   },
 ];
 
