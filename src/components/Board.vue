@@ -1,87 +1,50 @@
 <template>
-  <div :id="id"
-       class="board"
-       @dragover.prevent
-       @drop.prevent ="drop">
-       <h4 class="mt-2">{{boardTitle}} {{cardInfos.length}}</h4>
-      <!-- TODO Aşağıdaki butonu board'un dışına taşı. (Bir bug'a sebep oluyor) -->
-      <div  class="sheet"> 
-        <v-icon  @click="addCardInfo({id:lastId,  title: 'Title ' + lastId, text: 'Text'})">
-        mdi-plus-thick</v-icon> 
+  <div class="board">
+      <div class="title">
+          {{title}} {{count}}
       </div>
+        <div class="sheet"> 
+          <v-icon  @click="addData">mdi-plus-thick</v-icon>
+        </div>
+        
+      <slot></slot>
 
-      <Card v-for="info in cardInfos" :key="info.id" :info="info" draggable="true"/>
-      
-    <!-- FIXME Bir kart taşındıktan sonra aynısından bir tane daha oluşuyor -->
   </div>
 </template>
 
 <script>
-import Card from "./Card.vue"
-
 export default {
-    name:"Board",
-    components:{
-    Card
-    },
-    props: {
-      id: String,
-      boardTitle: String,
-      lastId: Number,
-      sourceBoardId: String
-    },
-    data: () => ({
-      cardInfos: []
-      
-    }),
-    watch: {
-      sourceBoardId(updated) {
-        if(updated != "" || updated != undefined) {
-          // TODO removeInfo metodunun parametresini değişken hale getir. (Taşınan kartın id'sini ver)
-          this.removeInfo(0)
-        }
-      }
-    },
-    methods:{
-      drop(e) {
-        const cardInfo = JSON.parse(e.dataTransfer.getData('card_info'))
-        const sourceBoardID = e.dataTransfer.getData('source_board_id')
-        this.$emit("findSourceBoard", sourceBoardID)   
-        this.cardInfos.push(cardInfo)
-        const card_id = cardInfo.id
-        const card = document.getElementById(card_id)
-        card.style.display = "block"
-        e.target.appendChild(card)
-        this.$emit("transferedCardID", card_id)
+    name: "Board",
+    props: ["title", "id","count"],
+    methods: {
+    addData() {
+      this.$store.dispatch("addToBoard", { // FIXME Math random metodu yerine id oluşturan bir paket kullan
+          cardInfo: {id:Math.floor(Math.random() * 100), title:"Title", text:"Text"}, status: this.id
+      })
+    },  
 
-      },
-      removeInfo(cardId) {
-        if(this.sourceBoardId == this.id) {
-          console.log(this.id,cardId)
-          let selectedInfo = this.cardInfos.find((info) => cardId == info.id)
-          this.cardInfos.splice(this.cardInfos.findIndex((element) => element == selectedInfo), 1)
-        }
-      },
-      addCardInfo(data) {
-        let newData = {id: this.lastId, title: data.title, text: data.text}
-        this.$emit("updateLastId", this.lastId + 1)
-        this.cardInfos.push(newData)
-      }
     }
+
 }
 </script>
-<style lang="scss" >
-h4{
-  padding-left: 8px;
-}
+
+<style lang="scss">
 .board{
-  display: flex;
-  flex-direction: column;
-  background:rgba(201, 201, 241, 0.1);
-  width: 100%;
-  max-width: 250px;
- 
+    background:rgba(201, 201, 241, 0.1);
+    width: 100%;
+    max-width: 300px;
+    margin: 0 15px;
+
 }
+.title{
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  
+    
+}
+
 .sheet{
   display: flex;
   justify-content: center;
@@ -90,4 +53,5 @@ h4{
   margin: 10px ;
   background-color: rgba(184, 184, 243, 0.1);  
 }
+
 </style>

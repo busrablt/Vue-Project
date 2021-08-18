@@ -1,69 +1,112 @@
 <template>
- <div>
-   <search/>
-  <v-list
-        style="max-height: 520px"
-        class="overflow-y-auto"
-    >
-   <h2>Projects</h2>
-  
-  <main class="flexbox">
-    <Board id="board-1" :boardTitle=titles[0] 
-     :lastId="lastId"
-      @updateLastId="lastId = $event"
-     :sourceBoardId="sourceBoard" 
-     @findSourceBoard="sourceBoard = $event"
-     />
-  
-    <Board id="board-2" :boardTitle=titles[1]  
-     :lastId="lastId"
-     @updateLastId="lastId = $event"
-     :sourceBoardId="sourceBoard"
-      @findSourceBoard="sourceBoard = $event"  
-      />
+  <div>
+    <Search />
+    <h2>Projects</h2>
 
-    <Board id="board-3" :boardTitle=titles[2] 
-     :lastId="lastId"
-      @updateLastId="lastId = $event"
-     :sourceBoardId="sourceBoard"  
-     @findSourceBoard="sourceBoard = $event"
-    /> 
-  </main>
-   </v-list>
- </div>
+    <div class="container">
+      <Board title="Todo List" id="todo" :count="todoList.length">
+        <v-list style="max-height: 520px" class="overflow-y-auto">
+          <draggable
+            class="draggable"
+            :list="todoList"
+            group="todosapp"
+            ghost-class="on-drag"
+            animation="400"
+          >
+            <Card v-for="item in todoList" :key="item.id" :item="item"></Card>
+          </draggable>
+        </v-list>
+      </Board>
+
+      <Board
+        title="In Progress List"
+        id="inProgress"
+        :count="inProgressList.length"
+      >
+        <v-list style="max-height: 520px" class="overflow-y-auto">
+          <draggable
+            class="draggable"
+            :list="inProgressList"
+            group="todosapp"
+            ghost-class="on-drag"
+            animation="400"
+          >
+            <Card v-for="item in inProgressList" :key="item.id" :item="item"/>
+          </draggable>
+        </v-list>
+      </Board>
+
+      <Board
+        title="Completed List"
+        id="completed"
+        :count="completedList.length"
+      >
+        <v-list style="max-height: 520px" class="overflow-y-auto">
+          <draggable
+            class="draggable"
+            :list="completedList"
+            group="todosapp"
+            ghost-class="on-drag"
+            animation="400"
+          >
+            <Card v-for="item in completedList" :key="item.id" :item="item" />
+          </draggable>
+        </v-list>
+      </Board>
+    </div>
+  </div>
 </template>
 
 <script>
-import Search from "./Search.vue"
-import Board from "./Board.vue"
+import Card from "./Card.vue";
+import Board from "./Board.vue";
+import Search from "./Search.vue";
+import draggable from "vuedraggable";
 
 export default {
-  name:"Projects",
-  data: () => ({
-    lastId: 0,
-    titles: ["To Do", "In Progress", "Completed"],
-    sourceBoard: ""
-  }),
-  components:{
+  name: "Projects",
+  components: {
     Board,
+    Card,
     Search,
-  }
-} 
+    draggable,
+  },
+  computed: {
+    todoList: function () {
+      return this.$store.getters.todo;
+    },
+    inProgressList: function () {
+      return this.$store.getters.inProgress;
+    },
+    completedList: function () {
+      return this.$store.getters.completed;
+    },
+    state() {
+      return this.$store.state.todoCards;
+    },
+  },
+  methods: {},
+};
 </script>
+<style lang="scss">
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
 
-<style lang="scss" >
 h2{
   padding: 15px;
 }
 
-.flexbox{
+.on-drag {
+  background-color: rgb(37, 0, 250);
+}
+
+.draggable {
   display: flex;
-  justify-content: space-between;
-  max-height: 100em;
-  min-height: 18em;
+  flex-direction: column;
   width: 100%;
-  overflow: hidden;
-  margin-right: 0 auto;
-  padding: 15px;
+  height: 100%;
 }
 </style>
