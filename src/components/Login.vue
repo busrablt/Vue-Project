@@ -1,47 +1,36 @@
 <template>
- <div id="app">
-  <v-app  id="inspire">
     <v-container>
       <v-layout wrap>
         <v-flex sm12 md6 offset-md3>
           <v-card elevation="4" light tag="section">
             <v-card-text>
-              <p>Sign in with your username and password:</p>
+              <p>Sign in with your email and password:</p>
               <v-form @submit.prevent="login()" >
                 <v-text-field
                               outline
                               label="Email"
                               type="text"
-                              v-model="email"></v-text-field>
+                              v-model="email"/>
+
                 <v-text-field
                               outline
                               hide-details
                               label="Password"
                               type="password"
-                              v-model="password"></v-text-field>
-                            <v-checkbox
-                                v-model="checkbox"
-                                :label="'Remember Me'"
-                            >
-                            </v-checkbox>
+                              v-model="password"/>
                             <v-card-actions >
-                            <v-btn color="info" >
-                                Forgot password?
-                            </v-btn>
-                            <v-spacer></v-spacer>
+                            <p>Need an account? <router-link to="/register"> Register Here</router-link></p>
+                            <v-spacer/>
                             <v-btn color="info" type="submit">
                                 Login
                             </v-btn>
-                            </v-card-actions>
+                            </v-card-actions>     
               </v-form>
             </v-card-text>
-            
           </v-card>
         </v-flex>
       </v-layout>
     </v-container>
-  </v-app>
-</div>
 </template>
 
 <script>
@@ -54,6 +43,7 @@ export default {
         const val = await firebase.auth().signInWithEmailAndPassword(this.email , this.password)
         console.log(val)
         this.$router.replace({name:"/"})
+        this.$store.dispatch("loggedIn")
         
       } catch (err) {
         console.log(err)
@@ -64,7 +54,6 @@ export default {
   },
    data () {
     return {
-      checkbox: false,
       password: "",
       email: ""
     }

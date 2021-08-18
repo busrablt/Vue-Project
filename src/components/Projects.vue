@@ -3,7 +3,7 @@
     <Search />
     <h2>Projects</h2>
 
-    <div class="container">
+    <div class="board-container">
       
       <Board title="Todo List" id="todo" :count="todoList.length">
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
@@ -43,7 +43,7 @@
         id="completed"
         :count="completedList.length"
       >
-        <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
+        <v-list class="overflow-y-auto"  style="list-style" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
             :list="completedList"
@@ -96,7 +96,7 @@ div.v-list {
   max-height: 520px;
 }
 
-.container {
+.board-container {
   display: flex;
   justify-content: center;
   padding: 15px;

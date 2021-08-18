@@ -1,46 +1,42 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Signin from "../components/Signin.vue"
-import Stats from "../components/Stats.vue"
-import Projects from "../components/Projects.vue"
-import Register from "../components/Register.vue"
-import Calendar from "../components/Calendar"
-
+import Projects from "../components/Projects.vue";
 
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/projects",
+    name: "Projects",
+    component: Projects,
   },
   {
     path: "/register",
     name: "Register",
-    component: Register,
+    component: () =>
+      import("../components/Register.vue"),
   },
+
   {
-    path: "/signin",
-    name: "Signin",
-    component: Signin,
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import("../components/Login.vue"),
   },
+
   {
     path: "/stats",
     name: "Stats",
-    component:Stats,
+    component: () =>
+      import("../components/Stats.vue"),
   },
-  {
-    path: "/projects",
-    name: "Projects",
-    component:Projects,
-  },
+
   {
     path: "/calendar",
     name: "Calander",
-    component: Calendar,
+    component: () =>
+      import("../components/Calendar.vue"),
   },
 ];
 

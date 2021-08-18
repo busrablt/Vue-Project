@@ -22,6 +22,7 @@
           v-for="(item, index) in buttomMenuItems"
           :key="index"
           link
+          @click="item.onClick"
           >
           <v-list-item-content>
             <router-link :to="item.route" class="menu__router" > 
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app"
+import "firebase/auth"
 export default {
     name:"Sidebar",
     data:()=>({
@@ -50,11 +53,16 @@ export default {
       ],
       buttomMenuItems:[
         {icon: "mdi-cog-outline", name: "Settings", route:"/"}, 
-        {icon: "mdi-logout", name: "Log Out", route:"/signin"}  
+        {icon: "mdi-logout", name: "Log Out", route:"/login", onClick: "signOut"}   //TODO Bind signout to button
       ]
-    })
-    
-
+    }),
+    methods: {
+      async signOut() {
+         await firebase.auth().signOut()
+         // TODO handle error
+         this.$store.dispatch("signOut")
+      }
+    }
 }
 </script>
 

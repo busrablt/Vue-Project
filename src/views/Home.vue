@@ -1,11 +1,7 @@
 <template>
-  <v-sheet
-    min-height="100vh"
-    rounded="lg"
-  >
- 
-    <router-view/>
-  </v-sheet>   
+<div>
+
+</div>
 </template>
 
 <script>
@@ -15,11 +11,6 @@
     data: () => ({
      
     }),
-    components:{
 
-       
-        
-        
-    }
   }
 </script>

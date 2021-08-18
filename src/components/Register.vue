@@ -1,38 +1,41 @@
 <template>
- <div id="app">
-  <v-app  id="inspire">
     <v-container>
       <v-layout wrap>
         <v-flex sm12 md6 offset-md3>
           <v-card elevation="4" light tag="section">
             <v-card-text>
-              <p>Sign in with your username and password:</p>
               <v-form @submit.prevent="pressed()">
+                 <v-text-field
+                              outline
+                              label="Firstname"
+                              type="text"
+                              v-model="firstname"/>
+
+                <v-text-field
+                              outline
+                              label="Lastname"
+                              type="text"
+                              v-model="lastname"/>
+
                 <v-text-field
                               outline
                               label="Email"
                               type="text"
-                              v-model="email"></v-text-field>
+                              v-model="email"/>
+
                 <v-text-field
                               outline
                               hide-details
                               label="Password"
                               type="password"
-                              v-model="password"></v-text-field>
-                            <v-checkbox
-                                v-model="checkbox"
-                                :label="'Remember Me'"
-                            >
-                            </v-checkbox>
+                              v-model="password"/>
                             <v-card-actions >
-                            <v-btn color="info" >
-                                Forgot password?
-                            </v-btn>
-                            <v-spacer></v-spacer>
+                            <p>Have an account? <router-link to="/login"> Login Here</router-link></p>
+                            <v-spacer/>
                             <v-btn color="info" type="submit">
-                                Login
+                                Register
                             </v-btn>
-                            </v-card-actions>
+                            </v-card-actions>  
               </v-form>
             </v-card-text>
             
@@ -40,8 +43,6 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-app>
-</div>
 </template>
 
 <script>
@@ -51,7 +52,7 @@ export default {
     methods:{
        async pressed(){
            try {
-               const user =  firebase.auth().createUserWithEmailAndPassword(this.email , this.password)
+               const user =  firebase.auth().createUserWithEmailAndPassword(this.firstname,this.lastname,this.email , this.password)
                console.log(user)
                this.$router.replace({name:"Stats"})
            } catch (err) {
@@ -62,7 +63,8 @@ export default {
     },
    data () {
     return {
-      checkbox: false,
+      firstname: "",
+      lastname: "",
       password: "",
       email: ""
     }

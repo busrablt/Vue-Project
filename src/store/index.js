@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     todoCards: [],
     inProgressCards: [],
-    completedCards : []
+    completedCards : [],
+    isLoggedIn: false
   },
   mutations: {
     // payload: {cardInfo, status}
@@ -47,10 +48,26 @@ export default new Vuex.Store({
 
       let itemIndex = selectedArray.findIndex((card) => card == payload.cardInfo)
       selectedArray.splice(itemIndex, 1)
-    }
+    },
+
+    loggedIn(state){
+      state.isLoggedIn = true
+
+    },
+    
+    signOut(state){
+      state.isLoggedIn = false
+
+    },
 
   },
   actions: {
+    loggedIn({ commit }) {
+      commit("loggedIn")
+    },
+    signOut({ commit }) {
+      commit("signOut")
+    },
     addToBoard({ commit }, payload) {
       commit("addToBoard", payload)
     },
@@ -71,6 +88,7 @@ export default new Vuex.Store({
     todo: state => state.todoCards,
     inProgress: state => state.inProgressCards,
     completed: state => state.completedCards,
+    isLoggedIn: state => state.isLoggedIn
 
   },
   modules: {},
