@@ -4,8 +4,9 @@
     <h2>Projects</h2>
 
     <div class="container">
+      
       <Board title="Todo List" id="todo" :count="todoList.length">
-        <v-list style="max-height: 520px" class="overflow-y-auto">
+        <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
             :list="todoList"
@@ -15,7 +16,8 @@
           >
             <Card v-for="item in todoList" :key="item.id" :item="item"></Card>
           </draggable>
-        </v-list>
+      </v-list>
+        
       </Board>
 
       <Board
@@ -23,14 +25,14 @@
         id="inProgress"
         :count="inProgressList.length"
       >
-        <v-list style="max-height: 520px" class="overflow-y-auto">
+        <v-list class="overflow-y-auto overflow-x-disabled" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
             :list="inProgressList"
             group="todosapp"
             ghost-class="on-drag"
             animation="400"
-          >
+          > 
             <Card v-for="item in inProgressList" :key="item.id" :item="item"/>
           </draggable>
         </v-list>
@@ -41,7 +43,7 @@
         id="completed"
         :count="completedList.length"
       >
-        <v-list style="max-height: 520px" class="overflow-y-auto">
+        <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
             :list="completedList"
@@ -89,6 +91,11 @@ export default {
 };
 </script>
 <style lang="scss">
+div.v-list {
+  min-height: 8em;
+  max-height: 520px;
+}
+
 .container {
   display: flex;
   justify-content: center;
