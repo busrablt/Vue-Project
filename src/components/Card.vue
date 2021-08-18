@@ -27,11 +27,11 @@ export default {
     props: ["item"],
     methods: {
         updateData() {
-            let statusName = this.$parent.$parent.id
+            let statusName = this.$parent.$parent.$parent.id
             this.$store.dispatch("updateCardInfo", {cardInfo: this.item, status: statusName})
         },
         removeData() {
-            let statusName = this.$parent.$parent.id
+            let statusName = this.$parent.$parent.$parent.id
             this.$store.dispatch("removeFromBoard", {cardInfo: this.item, status: statusName})
         },  
 
