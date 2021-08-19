@@ -1,53 +1,87 @@
 <template>
-    <v-card
-      :id="item.id"
-       class="card">
-        <v-card-text class="card-text">
-           <h3><input :placeholder="item.title" v-model="item.title" @blur="updateData"/><v-icon class="icon">mdi-paperclip</v-icon> </h3>   
-        </v-card-text>
-        <v-card-text class="card-text">
-           <input :placeholder="item.text" v-model="item.text"  @blur="updateData"/>   
-        </v-card-text>
-        
-        <v-card-actions >
-            <CardText/>
-           <v-icon  @click="removeData">mdi-delete</v-icon>
-        </v-card-actions>
-    </v-card>
+  <v-card :id="item.id" class="card">
+    <v-card-text class="card-text">
+      <h3>
+        <input
+          :placeholder="item.title"
+          v-model="item.title"
+          @blur="updateData"
+        /><v-icon class="icon">mdi-paperclip</v-icon>
+      </h3>
+    </v-card-text>
+    <v-card-text class="card-text">
+      <input
+        class="input"
+        :placeholder="item.text"
+        v-model="item.text"
+        @blur="updateData"
+      />
+    </v-card-text>
+
+    <v-card-actions>
+      <v-row justify="start">
+        <v-btn text color="rgb(9, 9, 196, 0.6)" @click.stop="dialog = true">
+          Open Card
+        </v-btn>
+        <v-dialog v-model="dialog" max-width="290">
+          <v-card>
+            <v-textarea name="input-7-1" v-model="item.text"></v-textarea>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="rgb(9, 9, 196, 0.6)" text @click="dialog = false">
+                Close
+              </v-btn>
+
+              <v-btn color="rgb(9, 9, 196, 0.6)" text @click="dialog = false">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+      <v-icon @click="removeData">mdi-delete</v-icon>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
-import CardText from "./CardText.vue"
 export default {
-    name: "Card",
-    components: {
-        CardText,
-
+  name: "Card",
+  props: ["item"],
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+  methods: {
+    updateData() {
+      let statusName = this.$parent.$parent.$parent.id;
+      this.$store.dispatch("updateCardInfo", {
+        cardInfo: this.item,
+        status: statusName,
+      });
     },
-    props: ["item"],
-    methods: {
-        updateData() {
-            let statusName = this.$parent.$parent.$parent.id
-            this.$store.dispatch("updateCardInfo", {cardInfo: this.item, status: statusName})
-        },
-        removeData() {
-            let statusName = this.$parent.$parent.$parent.id
-            this.$store.dispatch("removeFromBoard", {cardInfo: this.item, status: statusName})
-        },  
-
-    }
-
-}
+    removeData() {
+      let statusName = this.$parent.$parent.$parent.id;
+      this.$store.dispatch("removeFromBoard", {
+        cardInfo: this.item,
+        status: statusName,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-.card{
-    border: 1px solid #EEE;
-    margin-bottom: 15px;
+.card {
+  border: 1px solid #eee;
+  margin-bottom: 15px;
 }
-.card:hover{
-    cursor: move;
+.card:hover {
+  cursor: move;
 }
-
-
+.input {
+  width: 20em;
+}
 </style>

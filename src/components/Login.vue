@@ -24,7 +24,7 @@
                             <v-btn color="info" type="submit">
                                 Login
                             </v-btn>
-                            </v-card-actions>     
+                            </v-card-actions>  
               </v-form>
             </v-card-text>
           </v-card>
@@ -45,7 +45,7 @@ export default {
         this.$store.dispatch("loggedIn")
         
       } catch (err) {
-        console.log(err)
+        alert(err)
       }
 
       

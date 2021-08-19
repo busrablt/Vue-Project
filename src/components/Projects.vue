@@ -1,11 +1,12 @@
 <template>
   <div>
-    <Search />
+    <div class="search"> <Search /> </div>
+    
     <h2>Projects</h2>
 
     <div class="board-container">
       
-      <Board title="Todo List" id="todo" :count="todoList.length">
+      <Board title="To do" id="todo" :count="todoList.length">
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
@@ -21,7 +22,7 @@
       </Board>
 
       <Board
-        title="In Progress List"
+        title="In Progress"
         id="inProgress"
         :count="inProgressList.length"
       >
@@ -39,7 +40,7 @@
       </Board>
 
       <Board
-        title="Completed List"
+        title="Completed"
         id="completed"
         :count="completedList.length"
       >
@@ -103,7 +104,7 @@ div.v-list {
 }
 
 h2{
-  padding: 15px;
+  padding: 10px;
 }
 
 .on-drag {
@@ -115,5 +116,9 @@ h2{
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+.search{
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

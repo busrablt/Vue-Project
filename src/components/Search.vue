@@ -1,7 +1,7 @@
 <template>
    
       <div class="v-toolbar__search">
-        <v-toolbar flat style="border-radius:10px">
+        <v-toolbar flat >
           <v-toolbar-title>
             <form >
               <input type="text" placeholder="Search" >
@@ -18,13 +18,13 @@
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-toolbar{
-
+  
   &__content{
     justify-content: space-between;
-    border-bottom: 0.5px solid #ccc;
-
+    border-bottom: 0.5px  #ccc;
+    
   }
   &__search{
     
