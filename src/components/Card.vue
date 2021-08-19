@@ -9,21 +9,21 @@
            <input :placeholder="item.text" v-model="item.text"  @blur="updateData"/>   
         </v-card-text>
         
-        <v-card-actions>
-            <v-btn
-            text
-            color="deep-purple accent-4"
-            >
-              Learn More
-           </v-btn>
+        <v-card-actions >
+            <CardText/>
            <v-icon  @click="removeData">mdi-delete</v-icon>
         </v-card-actions>
     </v-card>
 </template>
 
 <script>
+import CardText from "./CardText.vue"
 export default {
     name: "Card",
+    components: {
+        CardText,
+
+    },
     props: ["item"],
     methods: {
         updateData() {
@@ -48,5 +48,6 @@ export default {
 .card:hover{
     cursor: move;
 }
+
 
 </style>

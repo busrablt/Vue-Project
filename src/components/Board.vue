@@ -48,9 +48,9 @@ export default {
 .sheet{
   display: flex;
   justify-content: center;
-  height: 50px;
-  max-width: 250px;
-  margin: 10px ;
+  height: 3em;
+  max-width: 20em;
+  margin: 1em ;
   background-color: rgba(184, 184, 243, 0.1);  
 }
 

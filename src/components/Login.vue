@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="login">
       <v-layout wrap>
         <v-flex sm12 md6 offset-md3>
           <v-card elevation="4" light tag="section">
@@ -40,8 +40,7 @@ export default {
   methods:{
     async login(){
       try {
-        const val = await firebase.auth().signInWithEmailAndPassword(this.email , this.password)
-        console.log(val)
+        await firebase.auth().signInWithEmailAndPassword(this.email , this.password)
         this.$router.replace({name:"/"})
         this.$store.dispatch("loggedIn")
         

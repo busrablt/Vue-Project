@@ -4,7 +4,7 @@
         <v-flex sm12 md6 offset-md3>
           <v-card elevation="4" light tag="section">
             <v-card-text>
-              <v-form @submit.prevent="pressed()">
+              <v-form @submit.prevent="register()">
                  <v-text-field
                               outline
                               label="Firstname"
@@ -50,11 +50,11 @@ import firebase from "firebase/app"
 import "firebase/auth"
 export default {
     methods:{
-       async pressed(){
+       async register(){
            try {
-               const user =  firebase.auth().createUserWithEmailAndPassword(this.firstname,this.lastname,this.email , this.password)
-               console.log(user)
-               this.$router.replace({name:"Stats"})
+               firebase.auth().createUserWithEmailAndPassword(this.email , this.password)
+               this.$router.replace({name:"/"})
+               this.$store.dispatch("loggedIn")
            } catch (err) {
                console.log(err)
            }
