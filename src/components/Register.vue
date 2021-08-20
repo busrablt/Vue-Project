@@ -61,6 +61,9 @@ export default {
                      db.collection('users').add({
                         firstname:this.firstname,
                         lastname: this.lastname
+                     }).then(()=>{
+                       this.$router.replace({name:"/"})
+                       this.$store.dispatch("loggedIn")
                      })
                   })
                })
