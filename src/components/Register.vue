@@ -48,17 +48,23 @@
 <script>
 import firebase from "firebase/app"
 import "firebase/auth"
+import "firebase/firestore"
+const db =firebase.firestore()
 export default {
-    methods:{
-       async register(){
-           try {
-               firebase.auth().createUserWithEmailAndPassword(this.email , this.password)
-               this.$router.replace({name:"/"})
-               this.$store.dispatch("loggedIn")
-           } catch (err) {
-               console.log(err)
-           }
-        
+   methods:{
+        register(){
+           
+               firebase.auth().createUserWithEmailAndPassword(this.email , this.password).then(()=>{
+                  firebase.auth().currentUser.updateProfile({
+                     displayName:this.firstname
+                  }).then(()=>{
+                     db.collection('users').add({
+                        firstname:this.firstname,
+                        lastname: this.lastname
+                     })
+                  })
+               })
+           
         }
     },
    data () {
