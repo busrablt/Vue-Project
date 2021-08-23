@@ -41,7 +41,7 @@ export default {
     async login(){
       try {
         await firebase.auth().signInWithEmailAndPassword(this.email , this.password)
-        this.$router.replace({name:"/"})
+        this.$router.replace({name:"Home"})
         this.$store.dispatch("loggedIn")
         
       } catch (err) {

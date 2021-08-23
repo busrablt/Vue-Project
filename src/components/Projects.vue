@@ -12,7 +12,6 @@
             class="draggable"
             :list="todoList"
             group="todosapp"
-            ghost-class="on-drag"
             animation="400"
           >
             <Card v-for="item in todoList" :key="item.id" :item="item"></Card>
@@ -26,12 +25,11 @@
         id="inProgress"
         :count="inProgressList.length"
       >
-        <v-list class="overflow-y-auto overflow-x-disabled" color="rgba(201, 201, 241, 0.1)">
+        <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
             :list="inProgressList"
             group="todosapp"
-            ghost-class="on-drag"
             animation="400"
           > 
             <Card v-for="item in inProgressList" :key="item.id" :item="item"/>
@@ -49,7 +47,6 @@
             class="draggable"
             :list="completedList"
             group="todosapp"
-            ghost-class="on-drag"
             animation="400"
           >
             <Card v-for="item in completedList" :key="item.id" :item="item" />

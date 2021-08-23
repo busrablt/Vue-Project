@@ -58,15 +58,21 @@ export default {
                   firebase.auth().currentUser.updateProfile({
                      displayName:this.firstname
                   }).then(()=>{
-                     db.collection('users').add({
-                        firstname:this.firstname,
-                        lastname: this.lastname
-                     }).then(()=>{
-                       this.$router.replace({name:"/"})
+                       this.$router.replace({name:"/Home"})
                        this.$store.dispatch("loggedIn")
+                     }).then(()=>{
+                     db.collection('users').add({
+                        user_id:this.userId,
+                        first_name:this.firstname,
+                        last_name: this.lastname,
+                        email:this.email,
+                        
+                        
                      })
                   })
-               })
+               }).catch(err=>alert(err))
+               console.log(firebase.auth().currentUser.email)
+               
            
         }
     },
@@ -75,7 +81,8 @@ export default {
       firstname: "",
       lastname: "",
       password: "",
-      email: ""
+      email: "",
+      userId:2,
     }
   }
 }

@@ -1,15 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Projects from "../components/Projects.vue";
+import Home from "../views/Home"
+
 
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "Home",
+    component: Home
+
+  },
+  {
     path: "/projects",
     name: "Projects",
-    component: Projects,
+    component: () =>  import("../components/Projects.vue") 
   },
   {
     path: "/register",
