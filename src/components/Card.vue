@@ -1,17 +1,17 @@
 <template>
   <v-card :id="item.id" class="card">
-    <v-card-text class="card-text">
+    <v-card-text class="card__text">
       <h3>
         <input
           :placeholder="item.title"
           v-model="item.title"
           @blur="updateData"
-        /><v-icon class="icon">mdi-paperclip</v-icon>
+        /><v-icon class="card__icon">mdi-paperclip</v-icon>
       </h3>
     </v-card-text>
-    <v-card-text class="card-text">
+    <v-card-text class="card__text">
       <input
-        class="input"
+        class="card__input"
         :placeholder="item.text"
         v-model="item.text"
         @blur="updateData"
@@ -77,11 +77,12 @@ export default {
 .card {
   border: 1px solid #eee;
   margin-bottom: 15px;
+  &:hover {
+    cursor: move;
+  }
+  &__input {
+    width: 20em;
+  }
 }
-.card:hover {
-  cursor: move;
-}
-.input {
-  width: 20em;
-}
+
 </style>
