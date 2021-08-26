@@ -40,7 +40,7 @@ export default {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data())
         this.user = doc.data()
-        
+        this.$store.dispatch("setUser", doc.data())
       })
       .catch((err) => console.error(`Error ${err}`));
       

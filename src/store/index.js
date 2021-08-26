@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import account from "./modules/account";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -8,115 +10,80 @@ export default new Vuex.Store({
     todoCards: [],
     inProgressCards: [],
     completedCards: [],
-    isLoggedIn: false,
-    token: null,
-    user: null
   },
+
+  plugins: [createPersistedState()],
+
   mutations: {
     // payload: {cardInfo, status}
     updateCardInfo(state, payload) {
       // find array
-      const arrayMap = new Map()
-      arrayMap.set("todo", state.todoCards)
-      arrayMap.set("inProgress", state.inProgressCards)
-      arrayMap.set("completed", state.completedCards)
+      const arrayMap = new Map();
+      arrayMap.set("todo", state.todoCards);
+      arrayMap.set("inProgress", state.inProgressCards);
+      arrayMap.set("completed", state.completedCards);
 
-      let info = payload.cardInfo
-      let selectedArray = arrayMap.get(payload.status)
+      let info = payload.cardInfo;
+      let selectedArray = arrayMap.get(payload.status);
       // find index of object
-      let cardIndex = selectedArray.findIndex((card) => card == info)
+      let cardIndex = selectedArray.findIndex((card) => card == info);
       // change object information with payload
-      selectedArray[cardIndex] = info
-
+      selectedArray[cardIndex] = info;
     },
     addToBoard(state, payload) {
-      const arrayMap = new Map()
-      arrayMap.set("todo", state.todoCards)
-      arrayMap.set("inProgress", state.inProgressCards)
-      arrayMap.set("completed", state.completedCards)
+      const arrayMap = new Map();
+      arrayMap.set("todo", state.todoCards);
+      arrayMap.set("inProgress", state.inProgressCards);
+      arrayMap.set("completed", state.completedCards);
 
-      let selectedArray = arrayMap.get(payload.status)
-      selectedArray.push(payload.cardInfo)
-
+      let selectedArray = arrayMap.get(payload.status);
+      selectedArray.push(payload.cardInfo);
     },
 
     removeFromBoard(state, payload) {
-      const arrayMap = new Map()
-      arrayMap.set("todo", state.todoCards)
-      arrayMap.set("inProgress", state.inProgressCards)
-      arrayMap.set("completed", state.completedCards)
+      const arrayMap = new Map();
+      arrayMap.set("todo", state.todoCards);
+      arrayMap.set("inProgress", state.inProgressCards);
+      arrayMap.set("completed", state.completedCards);
 
-      let selectedArray = arrayMap.get(payload.status)
+      let selectedArray = arrayMap.get(payload.status);
 
-      let itemIndex = selectedArray.findIndex((card) => card == payload.cardInfo)
-      selectedArray.splice(itemIndex, 1)
+      let itemIndex = selectedArray.findIndex(
+        (card) => card == payload.cardInfo
+      );
+      selectedArray.splice(itemIndex, 1);
     },
-
-    loggedIn(state) {
-      state.isLoggedIn = true
-
-    },
-
-    signOut(state) {
-      state.isLoggedIn = false
-
-    }
-    
-
   },
   actions: {
-    loggedIn({
-      commit
-    }) {
-      commit("loggedIn")
+    addToBoard({ commit }, payload) {
+      commit("addToBoard", payload);
     },
 
-    signOut({
-      commit
-    }) {
-      commit("signOut")
+    updateCardInfo({ commit }, payload) {
+      commit("updateCardInfo", payload);
     },
 
-    addToBoard({
-      commit
-    }, payload) {
-      commit("addToBoard", payload)
+    removeFromBoard({ commit }, payload) {
+      commit("removeFromBoard", payload);
     },
 
-    updateCardInfo({
-      commit
-    }, payload) {
-      commit("updateCardInfo", payload)
+    moveObject({ commit }, payload, nextStatus) {
+      commit("removeFromBoard", payload);
+      payload.status = nextStatus;
+      commit("addToBoard", payload);
     },
 
-    removeFromBoard({
-      commit
-    }, payload) {
-      commit("removeFromBoard", payload)
-    },
-
-    moveObject({
-      commit
-    }, payload, nextStatus) {
-      commit("removeFromBoard", payload)
-      payload.status = nextStatus
-      commit("addToBoard", payload)
-    },
-
-    signIn({
-      commit
-    }, credentials) {
-      localStorage.setItem("auth/signin", credentials)
-      commit("auth/signin", credentials)
-    }
-
+    // signIn({ commit }, credentials) {
+    //   localStorage.setItem("auth/signin", credentials);
+    //   commit("auth/signin", credentials);
+    // },
   },
   getters: {
-    todo: state => state.todoCards,
-    inProgress: state => state.inProgressCards,
-    completed: state => state.completedCards,
-    isLoggedIn: state => state.isLoggedIn
-
+    todo: (state) => state.todoCards,
+    inProgress: (state) => state.inProgressCards,
+    completed: (state) => state.completedCards,
   },
-  modules: {},
+  modules: {
+    account,
+  },
 });
