@@ -7,8 +7,10 @@ export default new Vuex.Store({
   state: {
     todoCards: [],
     inProgressCards: [],
-    completedCards : [],
-    isLoggedIn: false
+    completedCards: [],
+    isLoggedIn: false,
+    token: null,
+    user: null
   },
   mutations: {
     // payload: {cardInfo, status}
@@ -27,7 +29,7 @@ export default new Vuex.Store({
       selectedArray[cardIndex] = info
 
     },
-    addToBoard(state, payload){
+    addToBoard(state, payload) {
       const arrayMap = new Map()
       arrayMap.set("todo", state.todoCards)
       arrayMap.set("inProgress", state.inProgressCards)
@@ -38,7 +40,7 @@ export default new Vuex.Store({
 
     },
 
-    removeFromBoard(state, payload) { 
+    removeFromBoard(state, payload) {
       const arrayMap = new Map()
       arrayMap.set("todo", state.todoCards)
       arrayMap.set("inProgress", state.inProgressCards)
@@ -50,39 +52,64 @@ export default new Vuex.Store({
       selectedArray.splice(itemIndex, 1)
     },
 
-    loggedIn(state){
+    loggedIn(state) {
       state.isLoggedIn = true
 
     },
-    
-    signOut(state){
+
+    signOut(state) {
       state.isLoggedIn = false
 
-    },
+    }
+    
 
   },
   actions: {
-    loggedIn({ commit }) {
+    loggedIn({
+      commit
+    }) {
       commit("loggedIn")
     },
-    signOut({ commit }) {
+
+    signOut({
+      commit
+    }) {
       commit("signOut")
     },
-    addToBoard({ commit }, payload) {
+
+    addToBoard({
+      commit
+    }, payload) {
       commit("addToBoard", payload)
     },
-    updateCardInfo({ commit }, payload) {
+
+    updateCardInfo({
+      commit
+    }, payload) {
       commit("updateCardInfo", payload)
     },
-    removeFromBoard({ commit }, payload) {
+
+    removeFromBoard({
+      commit
+    }, payload) {
       commit("removeFromBoard", payload)
     },
 
-    moveObject({ commit }, payload, nextStatus) {
+    moveObject({
+      commit
+    }, payload, nextStatus) {
       commit("removeFromBoard", payload)
       payload.status = nextStatus
       commit("addToBoard", payload)
+    },
+
+    signIn({
+      commit
+    }, credentials) {
+      localStorage.setItem("auth/signin", credentials)
+      commit("auth/signin", credentials)
     }
+
   },
   getters: {
     todo: state => state.todoCards,

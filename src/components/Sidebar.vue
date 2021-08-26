@@ -50,10 +50,12 @@ export default {
     ],
   }),
   methods: {
-    async signOut() {
-      await firebase.auth().signOut();
-      // TODO handle error
+    signOut() {
+      firebase.auth().signOut().then(() => {
       this.$store.dispatch("signOut");
+      this.$router.replace("/login");
+      })
+
     },
   },
 };

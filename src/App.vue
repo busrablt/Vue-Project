@@ -10,7 +10,7 @@
             </v-col>
             <v-col :lg="showSidebar ? 10 : 12" :md="showSidebar ? 10 : 12" :sm="showSidebar ? 10 : 12">
               <v-sheet min-height="100vh" rounded="lg">
-                <v-btn @click="toggleSidebar" fab elevation="2" x-small >
+                <v-btn @click="toggleSidebar" fab tile elevation="2" x-small >
                   <v-icon>{{showSidebar ? "mdi-chevron-left" : "mdi-chevron-right"}} </v-icon> 
                   </v-btn>
                 <router-view />
@@ -51,11 +51,10 @@ export default {
     toggleSidebar() {
       this.showSidebar = !this.showSidebar
     },
-    // Firebase'de currentUser var mı kontrol et
     navigate() {
-      this.$router.replace("/");
-
+      let currentRoute = this.$route.name
       if (this.isLoggedIn) {
+        if(currentRoute == "Login" || currentRoute == "Register")
         this.$router.replace("/");
       } else {
         this.$router.replace("/login");

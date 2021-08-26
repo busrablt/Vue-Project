@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <div class="title">
-      {{ title }}
+      {{ title }} 
       <p>{{ count }}</p>
     </div>
     <div class="sheet">

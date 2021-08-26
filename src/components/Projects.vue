@@ -1,12 +1,17 @@
 <template>
   <div>
-    <div class="search"> <Search /> </div>
-    
+    <div class="search">
+      <Search :items="boardNames" @selected="selectedBoardName = $event" />
+    </div>
     <h2>Projects</h2>
 
     <div class="board-container">
-      
-      <Board title="To do" id="todo" :count="todoList.length">
+      <Board
+        :title="boardNames[1]"
+        id="todo"
+        v-if="boardController(1)"
+        :count="todoList.length"
+      >
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
@@ -14,16 +19,16 @@
             group="todosapp"
             animation="400"
           >
-            <Card v-for="item in todoList" :key="item.id" :item="item"></Card>
+            <Card v-for="item in todoList" :key="item.id" :item="item" />
           </draggable>
-      </v-list>
-        
+        </v-list>
       </Board>
 
       <Board
-        title="In Progress"
+        :title="boardNames[2]"
         id="inProgress"
         :count="inProgressList.length"
+        v-if="boardController(2)"
       >
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
@@ -31,18 +36,23 @@
             :list="inProgressList"
             group="todosapp"
             animation="400"
-          > 
-            <Card v-for="item in inProgressList" :key="item.id" :item="item"/>
+          >
+            <Card v-for="item in inProgressList" :key="item.id" :item="item" />
           </draggable>
         </v-list>
       </Board>
 
       <Board
-        title="Completed"
+        :title="boardNames[3]"
         id="completed"
         :count="completedList.length"
+        v-if="boardController(3)"
       >
-        <v-list class="overflow-y-auto"  style="list-style" color="rgba(201, 201, 241, 0.1)">
+        <v-list
+          class="overflow-y-auto"
+          style="list-style"
+          color="rgba(201, 201, 241, 0.1)"
+        >
           <draggable
             class="draggable"
             :list="completedList"
@@ -65,6 +75,10 @@ import draggable from "vuedraggable";
 
 export default {
   name: "Projects",
+  data: () => ({
+    boardNames: ["To do", "In Progress", "Completed"],
+    selectedBoardName: "All boards",
+  }),
   components: {
     Board,
     Card,
@@ -85,7 +99,14 @@ export default {
       return this.$store.state.todoCards;
     },
   },
-  methods: {},
+  methods: {
+    boardController(i) {
+      return (
+        this.selectedBoardName == "All boards" ||
+        this.selectedBoardName == this.boardNames[i]
+      );
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -100,7 +121,7 @@ div.v-list {
   padding: 15px;
 }
 
-h2{
+h2 {
   padding: 10px;
 }
 
@@ -114,8 +135,9 @@ h2{
   width: 100%;
   height: 100%;
 }
-.search{
+.search {
   display: flex;
+  flex-direction: row;
   justify-content: flex-end;
 }
 </style>
