@@ -5,10 +5,10 @@
       <v-main class="grey lighten-3">
         <v-container fluid>
           <v-row>
-            <v-col cols="2" lg="2" md="2" sm="2" v-if="showSidebar">
+            <v-col :lg="showSidebar ? 2 : 1" :md="showSidebar ? 2 : 1" :sm="showSidebar ? 2 : 1">
               <Sidebar />
             </v-col>
-            <v-col :lg="showSidebar ? 10 : 12" :md="showSidebar ? 10 : 12" :sm="showSidebar ? 10 : 12">
+            <v-col :lg="showSidebar ? 10 : 11" :md="showSidebar ? 10 : 11" :sm="showSidebar ? 10 : 11">
               <v-sheet min-height="100vh" rounded="lg">
                 <v-btn @click="toggleSidebar" fab tile elevation="2" x-small >
                   <v-icon>{{showSidebar ? "mdi-chevron-left" : "mdi-chevron-right"}} </v-icon> 
@@ -69,5 +69,16 @@ export default {
     flex-direction: row;
     justify-content: space-between;
   }
+}
+.row{
+  flex-wrap: nowrap !important;
+}
+.col-lg-1 {
+    flex: 0 0 6.333333%;
+    max-width: 6.333333%;
+}
+.col-lg-11 {
+    flex: 0 0 93.666667%;
+    max-width: 93.666667%;
 }
 </style>
