@@ -1,10 +1,10 @@
 <template>
   <div class="board">
-    <div class="title">
-      {{ title }} 
+    <div class="board__title">
+      {{ title }}
       <p>{{ count }}</p>
     </div>
-    <div class="sheet">
+    <div class="board__sheet">
       <v-icon @click="addData" color="rgb(9, 9, 196, 0.4)"
         >mdi-plus-thick</v-icon
       >
@@ -41,22 +41,21 @@ export default {
   max-width: 300px;
   margin: 0 15px;
   border-radius: 1em;
-}
-.title {
+  &__title {
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 500;
   margin-bottom: 10px;
 }
-
-.sheet {
+&__sheet {
   display: flex;
   justify-content: center;
   height: 3em;
   max-width: 20em;
   margin: 1em;
   background-color: rgba(184, 184, 243, 0.1);
+}
 }
 </style>
