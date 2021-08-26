@@ -5,11 +5,44 @@
         <img src="../assets/mobven.png" alt="Logo" width="150" height="50" />
       </div>
       <div class="information">
-        <v-icon class="information__icon" size="20"
-          >mdi-help-circle-outline</v-icon
-        >
+         <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon size="20">
+                  mdi-help-circle-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>about</span>
+          </v-tooltip>
         <v-icon class="information__icon" size="20">mdi-bell-outline</v-icon>
-        <h4 class="information__icon">{{`${this.user.first_name} ${this.user.last_name}`}}</h4>
+
+        <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="information__btn"
+          >
+           {{user.first_name}} {{user.last_name}}
+          </v-btn>
+        </template>
+  
+        <v-card>
+          <v-list>
+            <v-list-item v-for="(item,index) in menuItems" :key="index" class="v-list-item v-list-item--link theme--light">
+              <router-link :to="item.route" class="information__list-route">
+                <v-list-item-title>
+                  <v-icon>{{item.icon}}</v-icon> 
+                  {{item.name}}
+                </v-list-item-title>
+              </router-link>
+            </v-list-item>
+            
+          </v-list>
+        </v-card>
+      </v-menu>
+       
         <v-avatar
           class="mr-10 information__icon"
           color="grey darken-1"
@@ -28,6 +61,13 @@ export default {
   data: () => {
     return {
       user: {},
+      menuItems:[
+      { icon: "mdi-account", name: "Profile", route: "/profile" },
+      { icon: "mdi-cog-outline", name: "Settings", route: "/settings" },
+      { icon: "mdi-logout", name: "Log Out", route: "/logout" },
+      
+      ]
+    
     };
   },
   created() {
@@ -49,6 +89,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.container{
+  flex-wrap: nowrap !important;
+}
 .information {
   display: flex;
   flex-direction: row;
@@ -57,6 +100,15 @@ export default {
 
   &__icon {
     margin: 0.4em;
+  }
+  &__btn{
+    box-shadow: none;
+    background-color: white !important;
+  }
+  &__list-route{
+    text-decoration: none;
+    color: black;
+   
   }
 }
 </style>

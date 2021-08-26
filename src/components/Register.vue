@@ -3,6 +3,9 @@
     <v-layout wrap>
       <v-flex sm12 md6 offset-md3>
         <v-card elevation="4" light tag="section">
+          <v-card-subtitle class="register__logo">
+            <img src="../assets/mobven.png" width="250" height="80" alt="Mobven Logo" >
+            </v-card-subtitle>
           <v-card-text>
             <v-form @submit.prevent="register()">
               <v-text-field
@@ -85,3 +88,11 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.register{
+  &__logo{
+    display: flex;
+    justify-content: center;
+  }
+}
+</style>

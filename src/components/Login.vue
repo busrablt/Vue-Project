@@ -2,17 +2,23 @@
     <v-container class="login">
       <v-layout wrap>
         <v-flex sm12 md6 offset-md3>
+          
           <v-card elevation="4" light tag="section">
+            <v-card-subtitle class="login__logo">
+            <img src="../assets/mobven.png" width="250" height="80" alt="Mobven Logo" >
+            </v-card-subtitle>
             <v-card-text>
-              <p>Sign in with your email and password:</p>
+              
               <v-form @submit.prevent="login()" >
                 <v-text-field
+                              prepend-icon="mdi-account"
                               outline
                               label="Email"
                               type="text"
                               v-model="email"/>
 
                 <v-text-field
+                              prepend-icon="mdi-lock"
                               outline
                               hide-details
                               label="Password"
@@ -59,3 +65,15 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.login{
+  &__logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+.v-application--wrap{
+  justify-content: center;
+}
+</style>

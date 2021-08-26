@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid class="dropdown">
+  <div fluid class="dropdown">
     <v-row >
       <v-col class="d-flex" >
         <v-select :items="items" v-model="selected"  v-on:change="selectedToParent"
          label="Select Board Name" dense solo></v-select>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -29,6 +29,10 @@ export default {
 <style lang="scss">
 .dropdown{
   width: 20em;
+  margin-right: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 </style>
