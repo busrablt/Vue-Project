@@ -19,6 +19,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore();
 firebase.auth().onAuthStateChanged((user) => {
   if (user != null) {
     store.dispatch("loggedIn", user)

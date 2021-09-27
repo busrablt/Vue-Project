@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import account from "./modules/account";
 import createPersistedState from "vuex-persistedstate";
+import { db } from "../main"
+import { vuexfireMutations, firestoreAction } from 'vuexfire';
 
 Vue.use(Vuex);
 
@@ -10,80 +11,93 @@ export default new Vuex.Store({
     todoCards: [],
     inProgressCards: [],
     completedCards: [],
+    isLoggedIn: false,
+    user: null
   },
 
   plugins: [createPersistedState()],
 
   mutations: {
-    // payload: {cardInfo, status}
-    updateCardInfo(state, payload) {
-      // find array
-      const arrayMap = new Map();
-      arrayMap.set("todo", state.todoCards);
-      arrayMap.set("inProgress", state.inProgressCards);
-      arrayMap.set("completed", state.completedCards);
-
-      let info = payload.cardInfo;
-      let selectedArray = arrayMap.get(payload.status);
-      // find index of object
-      let cardIndex = selectedArray.findIndex((card) => card == info);
-      // change object information with payload
-      selectedArray[cardIndex] = info;
+    ...vuexfireMutations,
+    setUser(state, user) {
+      state.user = user;
     },
-    addToBoard(state, payload) {
-      const arrayMap = new Map();
-      arrayMap.set("todo", state.todoCards);
-      arrayMap.set("inProgress", state.inProgressCards);
-      arrayMap.set("completed", state.completedCards);
-
-      let selectedArray = arrayMap.get(payload.status);
-      selectedArray.push(payload.cardInfo);
+    loggedIn(state) {
+      state.isLoggedIn = true;
     },
-
-    removeFromBoard(state, payload) {
-      const arrayMap = new Map();
-      arrayMap.set("todo", state.todoCards);
-      arrayMap.set("inProgress", state.inProgressCards);
-      arrayMap.set("completed", state.completedCards);
-
-      let selectedArray = arrayMap.get(payload.status);
-
-      let itemIndex = selectedArray.findIndex(
-        (card) => card == payload.cardInfo
-      );
-      selectedArray.splice(itemIndex, 1);
+    signOut(state) {
+      state.isLoggedIn = false;
+      state.user = null;
     },
   },
   actions: {
-    addToBoard({ commit }, payload) {
-      commit("addToBoard", payload);
-    },
-
-    updateCardInfo({ commit }, payload) {
-      commit("updateCardInfo", payload);
-    },
-
-    removeFromBoard({ commit }, payload) {
-      commit("removeFromBoard", payload);
-    },
-
-    moveObject({ commit }, payload, nextStatus) {
-      commit("removeFromBoard", payload);
+    moveCard({ dispatch }, payload) {
+      const nextStatus = payload.nextStatus;
+      dispatch("removeFromBoard", {
+        cardId: payload.cardInfo.id,
+        status: payload.status,
+      });
       payload.status = nextStatus;
-      commit("addToBoard", payload);
+      dispatch("addToBoard", payload);
     },
+    bindTodoCards: firestoreAction(({ bindFirestoreRef, state }) => {
+      bindFirestoreRef("todoCards", db.collection("users")
+      .doc(state.user.user_id)
+      .collection("todo"))
+    }),
+    bindInProgressCards: firestoreAction(({ bindFirestoreRef, state }) => {
+      bindFirestoreRef("inProgressCards", db.collection("users")
+        .doc(state.user.user_id)
+        .collection("inProgress"));
+    }),
+    bindCompletedCards: firestoreAction(({ bindFirestoreRef, state }) => {
+      bindFirestoreRef("completedCards", db.collection("users")
+        .doc(state.user.user_id)
+        .collection("completed"));
+    }),
 
-    // signIn({ commit }, credentials) {
-    //   localStorage.setItem("auth/signin", credentials);
-    //   commit("auth/signin", credentials);
-    // },
+    addToBoard: firestoreAction(({ state }, payload) => {
+      db.collection("users")
+        .doc(state.user.user_id)
+        .collection(payload.status)
+        .doc(payload.cardInfo.id)
+        .set(payload.cardInfo).then(() => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    }),
+
+    removeFromBoard: firestoreAction(({ state }, payload) => {
+      return db.collection("users")
+        .doc(state.user.user_id)
+        .collection(payload.status)
+        .doc(payload.cardId)
+        .delete()
+    }),
+
+    updateBoard: firestoreAction(({ state }, payload) => {
+      return db.collection("users")
+        .doc(state.user.user_id)
+        .collection(payload.status)
+        .doc(payload.cardInfo.id)
+        .update(payload.cardInfo)
+    }),
+    loggedIn({ commit }) {
+      commit("loggedIn");
+    },
+    signOut({ commit }) {
+      commit("signOut");
+    },
+    setUser({ commit }, user) {
+      commit("setUser", user);
+    },
   },
   getters: {
     todo: (state) => state.todoCards,
     inProgress: (state) => state.inProgressCards,
     completed: (state) => state.completedCards,
-  },
-  modules: {
-    account,
+    isLoggedIn: (state) => state.isLoggedIn,
+    user: (state) => state.user,
   },
 });

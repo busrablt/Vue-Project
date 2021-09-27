@@ -14,10 +14,12 @@
       >
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
+            id="todo"
             class="draggable"
             :list="todoList"
             group="todosapp"
             animation="400"
+            @end="onEnd"
           >
             <Card v-for="item in todoList" :key="item.id" :item="item" />
           </draggable>
@@ -33,9 +35,11 @@
         <v-list class="overflow-y-auto" color="rgba(201, 201, 241, 0.1)">
           <draggable
             class="draggable"
+            id="inProgress"
             :list="inProgressList"
             group="todosapp"
             animation="400"
+            @end="onEnd"
           >
             <Card v-for="item in inProgressList" :key="item.id" :item="item" />
           </draggable>
@@ -56,8 +60,10 @@
           <draggable
             class="draggable"
             :list="completedList"
+            id="completed"
             group="todosapp"
             animation="400"
+             @end="onEnd"
           >
             <Card v-for="item in completedList" :key="item.id" :item="item" />
           </draggable>
@@ -72,6 +78,7 @@ import Card from "./Card.vue";
 import Board from "./Board.vue";
 import Search from "./Search.vue";
 import draggable from "vuedraggable";
+import { mapActions } from "vuex";
 
 export default {
   name: "Projects",
@@ -85,21 +92,50 @@ export default {
     Search,
     draggable,
   },
+  created() {
+    this.bindCards()
+  },
   computed: {
     todoList: function () {
-      return this.$store.getters.todo;
+      return this.$store.getters.todo.filter(function(item, pos, self) {
+      return self.indexOf(item) == pos;
+      });
     },
     inProgressList: function () {
-      return this.$store.getters.inProgress;
+      return this.$store.getters.inProgress.filter(function(item, pos, self) {
+      return self.indexOf(item) == pos;
+      });
     },
     completedList: function () {
-      return this.$store.getters.completed;
-    },
-    state() {
-      return this.$store.state.todoCards;
-    },
+      return this.$store.getters.completed.filter(function(item, pos, self) {
+      return self.indexOf(item) == pos;
+      });
+    }
   },
   methods: {
+    ...mapActions(["bindTodoCards", "bindInProgressCards", "bindCompletedCards"]),
+     onEnd(event) {
+      const from = event.target.id
+      const to = event.to.id
+      const movedCardId = event.item.id
+      if(from !== to) {
+        let cardInfo
+        if(to === "todo") {
+          cardInfo = this.todoList.filter(card => card.id === movedCardId)[0]
+        } else if(to === "inProgress") {
+          cardInfo = this.inProgressList.filter(card => card.id === movedCardId)[0]
+        } else if(to === "completed") {
+          cardInfo = this.completedList.filter(card => card.id === movedCardId)[0]
+        }
+       this.$store.dispatch("moveCard", { cardInfo: cardInfo, status: from, nextStatus: to })
+      }
+    },
+    bindCards() {
+      this.bindTodoCards()
+      this.bindInProgressCards()
+      this.bindCompletedCards()
+      console.log("Card binding completed")
+    },
     boardController(i) {
       return (
         this.selectedBoardName == "All boards" ||

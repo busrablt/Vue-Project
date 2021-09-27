@@ -57,7 +57,7 @@ export default {
   methods: {
     updateData() {
       let statusName = this.$parent.$parent.$parent.id;
-      this.$store.dispatch("updateCardInfo", {
+      this.$store.dispatch("updateBoard", {
         cardInfo: this.item,
         status: statusName,
       });
@@ -65,10 +65,13 @@ export default {
     removeData() {
       let statusName = this.$parent.$parent.$parent.id;
       this.$store.dispatch("removeFromBoard", {
-        cardInfo: this.item,
+        cardId: this.item.id,
         status: statusName,
       });
     },
+    // getParentBoard() {
+    //   this.$emit("parentBoard", this.$parent.$parent.$parent.id);
+    // }
   },
 };
 </script>

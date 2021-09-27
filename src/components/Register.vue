@@ -60,12 +60,11 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((authUser) => {
           let userInfo = {
-            user_id: this.userId,
+            user_id: authUser.user.uid,
             first_name: this.firstname,
             last_name: this.lastname,
             email: this.email,
-          }; 
-
+          };
           db.collection("users")
             .doc(authUser.user.uid)
             .set(userInfo)
@@ -83,7 +82,6 @@ export default {
       lastname: "",
       password: "",
       email: "",
-      userId: 2,
     };
   },
 };

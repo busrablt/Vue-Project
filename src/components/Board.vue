@@ -19,11 +19,22 @@ export default {
   name: "Board",
   props: ["title", "id", "count"],
   methods: {
+    makeId(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
     addData() {
       this.$store.dispatch("addToBoard", {
-        // FIXME Math random metodu yerine id oluşturan bir paket kullan
         cardInfo: {
-          id: Math.floor(Math.random() * 100),
+          id: this.makeId(10),
           title: "Title",
           text: "Text",
         },
@@ -42,20 +53,20 @@ export default {
   margin: 0 15px;
   border-radius: 1em;
   &__title {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-&__sheet {
-  display: flex;
-  justify-content: center;
-  height: 3em;
-  max-width: 20em;
-  margin: 1em;
-  background-color: rgba(184, 184, 243, 0.1);
-}
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  &__sheet {
+    display: flex;
+    justify-content: center;
+    height: 3em;
+    max-width: 20em;
+    margin: 1em;
+    background-color: rgba(184, 184, 243, 0.1);
+  }
 }
 </style>
