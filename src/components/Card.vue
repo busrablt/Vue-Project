@@ -6,7 +6,7 @@
           :placeholder="item.title"
           v-model="item.title"
           @blur="updateData"
-        /><v-icon class="card__icon">mdi-paperclip</v-icon>
+        />
       </h3>
     </v-card-text>
     <v-card-text class="card__text">
@@ -69,9 +69,6 @@ export default {
         status: statusName,
       });
     },
-    // getParentBoard() {
-    //   this.$emit("parentBoard", this.$parent.$parent.$parent.id);
-    // }
   },
 };
 </script>
@@ -86,6 +83,8 @@ export default {
   &__input {
     width: 20em;
   }
+  &__text {
+    display: flex;
+  }
 }
-
 </style>

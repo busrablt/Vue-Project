@@ -52,6 +52,17 @@ export default {
   max-width: 300px;
   margin: 0 15px;
   border-radius: 1em;
+  @media only screen and(max-width:770px) {
+    max-width: 180px;
+    margin: 0 10px;
+  }
+  @media only screen and(min-width:770px) and(max-width:815px) {
+    max-width: 200px;
+  }
+  @media only screen and(min-width:815px) and(max-width:950px) {
+    max-width: 230px;
+  }
+
   &__title {
     display: flex;
     justify-content: space-between;
