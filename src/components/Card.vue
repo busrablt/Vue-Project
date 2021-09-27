@@ -25,7 +25,11 @@
         </v-btn>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
-            <v-textarea name="input-7-1" v-model="item.text"></v-textarea>
+            <v-textarea
+              name="input-7-1"
+              style="padding-left: 20px"
+              v-model="item.text"
+            ></v-textarea>
             <v-card-actions>
               <v-spacer></v-spacer>
 
@@ -85,6 +89,9 @@ export default {
   }
   &__text {
     display: flex;
+  }
+  .text-area {
+    padding: 20px;
   }
 }
 </style>

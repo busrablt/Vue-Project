@@ -5,14 +5,26 @@
       <v-main class="grey lighten-3">
         <v-container fluid>
           <v-row>
-            <v-col :lg="showSidebar ? 2 : 1" :md="showSidebar ? 2 : 1" :sm="showSidebar ? 2 : 1">
+            <v-col
+              :lg="showSidebar ? 2 : 1"
+              :md="showSidebar ? 2 : 1"
+              :sm="showSidebar ? 2 : 1"
+            >
               <Sidebar />
             </v-col>
-            <v-col :lg="showSidebar ? 10 : 11" :md="showSidebar ? 10 : 11" :sm="showSidebar ? 10 : 11">
+            <v-col
+              :lg="showSidebar ? 10 : 11"
+              :md="showSidebar ? 10 : 11"
+              :sm="showSidebar ? 10 : 11"
+            >
               <v-sheet min-height="100vh" rounded="lg">
-                <v-btn @click="toggleSidebar" fab tile elevation="2" x-small >
-                  <v-icon>{{showSidebar ? "mdi-chevron-left" : "mdi-chevron-right"}} </v-icon> 
-                  </v-btn>
+                <v-btn @click="toggleSidebar" fab tile elevation="2" x-small>
+                  <v-icon
+                    >{{
+                      showSidebar ? "mdi-chevron-left" : "mdi-chevron-right"
+                    }}
+                  </v-icon>
+                </v-btn>
                 <router-view />
               </v-sheet>
             </v-col>
@@ -21,7 +33,7 @@
       </v-main>
     </div>
     <div v-else>
-      <router-view/>
+      <router-view />
     </div>
   </v-app>
 </template>
@@ -33,7 +45,7 @@ export default {
   name: "App",
   data: () => ({
     links: ["Profile", "Updates"],
-    showSidebar: true
+    showSidebar: true,
   }),
   components: {
     Sidebar,
@@ -49,13 +61,13 @@ export default {
   },
   methods: {
     toggleSidebar() {
-      this.showSidebar = !this.showSidebar
+      this.showSidebar = !this.showSidebar;
     },
     navigate() {
-      let currentRoute = this.$route.name
+      let currentRoute = this.$route.name;
       if (this.isLoggedIn) {
-        if(currentRoute == "Login" || currentRoute == "Register")
-        this.$router.replace("/");
+        if (currentRoute == "Login" || currentRoute == "Register")
+          this.$router.replace("/");
       } else {
         this.$router.replace("/login");
       }
@@ -70,15 +82,15 @@ export default {
     justify-content: space-between;
   }
 }
-.row{
+.row {
   flex-wrap: nowrap !important;
 }
 .col-lg-1 {
-    flex: 0 0 6.333333%;
-    max-width: 6.333333%;
+  flex: 0 0 6.333333%;
+  max-width: 6.333333%;
 }
 .col-lg-11 {
-    flex: 0 0 93.666667%;
-    max-width: 93.666667%;
+  flex: 0 0 93.666667%;
+  max-width: 93.666667%;
 }
 </style>
