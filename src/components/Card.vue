@@ -1,22 +1,23 @@
 <template>
   <v-card :id="item.id" class="card">
-    <v-card-text class="card__text">
+    <div class="card__text">
       <h3>
         <input
+          class="card__input"
           :placeholder="item.title"
           v-model="item.title"
           @blur="updateData"
         />
       </h3>
-    </v-card-text>
-    <v-card-text class="card__text">
+    </div>
+    <div class="card__text">
       <input
         class="card__input"
         :placeholder="item.text"
         v-model="item.text"
         @blur="updateData"
       />
-    </v-card-text>
+    </div>
 
     <v-card-actions>
       <v-row justify="start">
@@ -86,12 +87,28 @@ export default {
   }
   &__input {
     width: 20em;
+    @media  screen and (max-width:768px) {
+     width: 5em;
+      
+    }
   }
   &__text {
     display: flex;
+    justify-content: flex-start;
+    @media  screen and (max-width:768px) {
+      font-size: 12px !important ;
+      
+    }
   }
   .text-area {
     padding: 20px;
   }
+}
+.v-card__title {
+  padding: 5px;
+  @media screen and (max-width:768px) {
+     padding: 4px;
+  }
+   
 }
 </style>

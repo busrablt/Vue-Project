@@ -64,6 +64,11 @@ export default {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 10px;
+    @media screen and(max-width:768px) {
+      padding: 3px 12px;
+      font-size: 12px;
+      max-height: 24px;
+    }
   }
   &__sheet {
     display: flex;
@@ -72,6 +77,11 @@ export default {
     max-width: 20em;
     margin: 1em;
     background-color: rgba(184, 184, 243, 0.1);
+    @media screen and(max-width:768px) {
+      max-width: 5em;
+      height: 2em;
+      margin: 5px auto;
+    }
   }
 }
 </style>

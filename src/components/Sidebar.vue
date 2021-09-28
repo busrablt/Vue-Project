@@ -81,6 +81,7 @@ export default {
   justify-content: space-between;
   padding: 10px 0 10px 0;
   background-color: #ffff;
+  border-radius: 8px;
   &__top-elements {
     margin-bottom: 30px;
     padding-left: 8px;

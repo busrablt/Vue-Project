@@ -5,22 +5,14 @@
       <v-main class="grey lighten-3">
         <v-container fluid>
           <v-row>
-            <v-col
-              :lg="showSidebar ? 2 : 1"
-              :md="showSidebar ? 2 : 1"
-              :sm="showSidebar ? 2 : 1"
-            >
+            <div class="col-left">
               <Sidebar />
-            </v-col>
-            <v-col
-              :lg="showSidebar ? 10 : 11"
-              :md="showSidebar ? 10 : 11"
-              :sm="showSidebar ? 10 : 11"
-            >
+            </div>
+            <div class="col-right">
               <v-sheet min-height="100vh" rounded="lg">
                 <router-view />
               </v-sheet>
-            </v-col>
+            </div>
           </v-row>
         </v-container>
       </v-main>
@@ -79,11 +71,24 @@ export default {
   flex-wrap: nowrap !important;
 }
 .col-lg-1 {
+     
   flex: 0 0 6.333333%;
   max-width: 6.333333%;
+}
+.col-left{
+  width: 20%;
+  padding: 12px;
 }
 .col-lg-11 {
   flex: 0 0 93.666667%;
   max-width: 93.666667%;
+}
+.col-right {
+  width: 84%;
+  padding: 12px;
+  @media screen and(max-width:768px) {
+        width: 80%;
+    
+  }
 }
 </style>
