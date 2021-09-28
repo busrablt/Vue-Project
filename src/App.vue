@@ -18,13 +18,6 @@
               :sm="showSidebar ? 10 : 11"
             >
               <v-sheet min-height="100vh" rounded="lg">
-                <v-btn @click="toggleSidebar" fab tile elevation="2" x-small>
-                  <v-icon
-                    >{{
-                      showSidebar ? "mdi-chevron-left" : "mdi-chevron-right"
-                    }}
-                  </v-icon>
-                </v-btn>
                 <router-view />
               </v-sheet>
             </v-col>

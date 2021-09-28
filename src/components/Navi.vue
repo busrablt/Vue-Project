@@ -1,17 +1,24 @@
 <template>
   <div class="container">
     <div class="main">
-      <img src="../assets/mobven.png" alt="Logo" width="150" height="50" />
+      <img
+        class="logo"
+        src="../assets/mobven.png"
+        alt="Logo"
+        width="150"
+        height="50"
+      />
       <div class="information">
-        <img src="../assets/bell.svg" alt="Logo" width="50" height="20" />
+        <img src="../assets/bell.svg" alt="Logo" width="40" height="20" />
         <img
           src="../assets/about.svg"
           alt="Logo"
-          width="50"
+          width="40"
           height="20"
           style="margin-left: -10px"
         />
         <span>{{ user.first_name }} {{ user.last_name }}</span>
+        <div class="avatar" />
       </div>
     </div>
   </div>
@@ -53,7 +60,8 @@ export default {
 .container {
   .main {
     display: flex;
-    img {
+    justify-content: space-between;
+    .logo {
       @media only screen and(max-width:768px) {
         width: 80px;
         height: 30px;
@@ -66,8 +74,22 @@ export default {
       align-items: center;
       justify-content: flex-end;
       span {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
+        @media only screen and(max-width:768px) {
+          font-size: 16px;
+        }
+      }
+    }
+    .avatar {
+      width: 36px;
+      height: 36px;
+      background-color: rgb(65, 64, 64);
+      border-radius: 50%;
+      margin-left: 10px;
+      @media only screen and(max-width:768px) {
+        width: 32px;
+        height: 32px;
       }
     }
   }
