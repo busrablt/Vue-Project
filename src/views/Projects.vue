@@ -170,7 +170,7 @@ div.v-list {
     justify-content: center;
     padding: 15px;
     @media screen and (max-width:768px) {
-      grid-template-columns: repeat(2 , 0.1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -185,6 +185,7 @@ h2 {
 .draggable {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
