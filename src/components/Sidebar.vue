@@ -88,10 +88,21 @@ export default {
     @media only screen and(max-width:768px) {
       margin-right: 10px;
     }
+    @media screen and(min-width:350px) and(max-width:400px) {
+      padding-left: 4px;
+      margin-right: 4px;
+    }
   }
   &__bottom-elements {
     margin-bottom: 30px;
     padding-left: 8px;
+    @media only screen and(max-width:768px) {
+      margin-right: 10px;
+    }
+    @media screen and(min-width:350px) and(max-width:400px) {
+      padding-left: 4px;
+      margin-right: 4px;
+    }
   }
 
   &__router {
@@ -101,11 +112,20 @@ export default {
   &__item-title {
     color: black;
     display: flex;
+    align-items: center;
   }
   .item-name {
     margin-left: 10px;
-    @media only screen and(max-width:768px) {
+    font-size: 16px;
+    @media only screen and(max-width:700px) {
       display: none;
+    }
+    @media screen and(min-width:700px) and(max-width:800px) {
+      font-size: 14px;
+    }
+    @media screen and(min-width:800px) and(max-width:900px) {
+      font-size: 16px;
+      padding-left: 4px;
     }
   }
 }

@@ -164,14 +164,13 @@ div.v-list {
 }
 
 .board-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 310px);
-    flex-direction: column;
-    justify-content: center;
-    padding: 15px;
-    @media screen and (max-width:768px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 310px);
+  flex-direction: column;
+  justify-content: center;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 h2 {

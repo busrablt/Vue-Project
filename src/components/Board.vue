@@ -52,8 +52,33 @@ export default {
   max-width: 300px;
   margin: 0 15px;
   border-radius: 1em;
-  @media only screen and(max-width:770px) {
+  @media only screen and(max-width:500px) {
     max-width: 80px;
+    margin: 0 10px;
+  }
+  @media only screen and(min-width:500px) and(max-width:600px) {
+    max-width: 100px;
+    margin: 0 10px;
+  }
+  @media only screen and(min-width:600px) and(max-width:650px) {
+    max-width: 120px;
+    margin: 0 10px;
+  }
+
+  @media only screen and(min-width:650px) and(max-width:700px) {
+    max-width: 140px;
+    margin: 0 10px;
+  }
+  @media only screen and(min-width:700px) and(max-width:760px) {
+    max-width: 160px;
+    margin: 0 10px;
+  }
+  @media screen and(min-width:760px) and(max-width:800px) {
+    max-width: 180px;
+    margin: 0 10px;
+  }
+  @media screen and(min-width:800px) and(max-width:1024px) {
+    max-width: 250px;
     margin: 0 10px;
   }
 
@@ -81,6 +106,20 @@ export default {
       max-width: 5em;
       height: 2em;
       margin: 5px auto;
+    }
+    @media only screen and(max-width:500px) {
+      max-width: 5em;
+      height: 1.5em;
+      margin: 5px auto;
+    }
+
+    @media only screen and(min-width:700px) and(max-width:760px) {
+      max-width: 8em;
+      height: 2em;
+    }
+    @media screen and(min-width:760px) and(max-width:800px) {
+      max-width: 10em;
+      height: 2em;
     }
   }
 }
