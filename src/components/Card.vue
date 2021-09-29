@@ -21,9 +21,9 @@
 
     <v-card-actions>
       <v-row justify="start">
-        <v-btn text color="rgb(9, 9, 196, 0.6)" @click.stop="dialog = true">
+        <span class="card__btn-open" text color="rgb(9, 9, 196, 0.6)" @click.stop="dialog = true">
           Open Card
-        </v-btn>
+        </span>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <v-textarea
@@ -45,7 +45,7 @@
           </v-card>
         </v-dialog>
       </v-row>
-      <v-icon @click="removeData">mdi-delete</v-icon>
+      <v-icon class="card__delete-icon" @click="removeData">mdi-delete</v-icon>
     </v-card-actions>
   </div>
 </template>
@@ -89,6 +89,11 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   padding:6px 14px;
+   @media  screen and (max-width:768px) {
+     width: 73px;
+     height: 80px;
+     padding: 6px 10px;
+    }
   &:hover {
     cursor: move;
   }
@@ -96,20 +101,32 @@ export default {
     width: 14em;
 
     @media  screen and (max-width:768px) {
-     width: 5em;
-      
+      width: 3em;
     }
   }
   &__text {
     display: flex;
     justify-content: flex-start;
     @media  screen and (max-width:768px) {
-      font-size: 12px !important ;
+      font-size: 10px !important ;
       
     }
+  
   }
   .text-area {
     padding: 20px;
+  }
+  &__btn-open{
+    @media  screen and (max-width:768px) {
+      font-size: 10px;
+      
+    }
+  }  
+  &__delete-icon{
+    @media  screen and (max-width:768px) {
+     font-size: 18px !important; 
+    }
+    
   }
 }
 .v-card__title {
@@ -118,5 +135,11 @@ export default {
      padding: 4px;
   }
    
+}
+.v-card__actions{
+  @media screen and (max-width:768px) {
+    width: 58px;
+  }
+ 
 }
 </style>
