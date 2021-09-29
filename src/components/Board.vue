@@ -53,7 +53,7 @@ export default {
   margin: 0 15px;
   border-radius: 1em;
   @media only screen and(max-width:770px) {
-    max-width: 100px;
+    max-width: 80px;
     margin: 0 10px;
   }
 

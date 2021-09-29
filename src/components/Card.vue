@@ -1,5 +1,5 @@
 <template>
-  <v-card :id="item.id" class="card">
+  <div :id="item.id" class="card">
     <div class="card__text">
       <h3>
         <input
@@ -47,7 +47,7 @@
       </v-row>
       <v-icon @click="removeData">mdi-delete</v-icon>
     </v-card-actions>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -81,12 +81,20 @@ export default {
 <style lang="scss">
 .card {
   border: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 6px;
   margin-bottom: 15px;
+  height: 130px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  padding:6px 14px;
   &:hover {
     cursor: move;
   }
   &__input {
-    width: 20em;
+    width: 14em;
+
     @media  screen and (max-width:768px) {
      width: 5em;
       
