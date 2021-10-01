@@ -76,7 +76,7 @@ export default {
 
 <style lang="scss">
 .menu {
-  min-height: 138vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

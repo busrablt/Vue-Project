@@ -171,6 +171,7 @@ div.v-list {
   justify-content: center;
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
+    min-height: 610px;
   }
 }
 

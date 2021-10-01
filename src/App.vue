@@ -9,7 +9,7 @@
               <Sidebar />
             </div>
             <div class="col-right">
-              <v-sheet min-height="138vh" rounded="lg">
+              <v-sheet rounded="lg">
                 <router-view />
               </v-sheet>
             </div>
@@ -90,5 +90,12 @@ export default {
         width: 78%;
     
   }
+  
 }
+.v-sheet{
+    min-height:100%;
+    @media screen and(max-width:1300px) {
+        min-height: 100vh;
+    }
+  }
 </style>

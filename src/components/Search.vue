@@ -39,7 +39,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 20px;
   @media only screen and(max-width:768px) {
     width: 10em;
   }
