@@ -73,11 +73,11 @@ export default {
     max-width: 160px;
     margin: 0 10px;
   }
-  @media screen and(min-width:760px) and(max-width:800px) {
+  @media screen and(min-width:760px) and(max-width:960px) {
     max-width: 180px;
     margin: 0 10px;
   }
-  @media screen and(min-width:800px) and(max-width:1024px) {
+  @media screen and(min-width:960px) and(max-width:1200px) {
     max-width: 250px;
     margin: 0 10px;
   }

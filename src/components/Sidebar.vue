@@ -55,8 +55,9 @@ export default {
       { icon: mdiCalendar, name: "Calendar", route: "calendar" },
     ],
     bottomMenuItems: [
-      { icon: mdiLogout, name: "Logout", route: "/logout" },
       { icon: mdiCogOutline, name: "Settings", route: "/settings" },
+      { icon: mdiLogout, name: "Logout", route: "/logout" },
+
     ],
   }),
   methods: {
@@ -75,11 +76,11 @@ export default {
 
 <style lang="scss">
 .menu {
-  min-height: 100vh;
+  min-height: 138vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px 0 10px 0;
+  padding: 40px 0 30px 0;
   background-color: #ffff;
   border-radius: 8px;
   &__top-elements {
