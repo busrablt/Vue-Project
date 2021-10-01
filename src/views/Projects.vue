@@ -164,8 +164,9 @@ div.v-list {
 }
 
 .board-container {
+  min-height: 640px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 310px);
+  grid-template-columns: repeat(3 ,1fr);
   flex-direction: column;
   justify-content: center;
   @media screen and (max-width: 1024px) {

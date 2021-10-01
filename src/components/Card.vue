@@ -85,14 +85,38 @@ export default {
   border-radius: 6px;
   margin-bottom: 15px;
   height: 130px;
+  width: 280px;
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
   padding:6px 14px;
-   @media  screen and (max-width:768px) {
+   @media  screen and (max-width:500px) {
      width: 73px;
      height: 80px;
-     padding: 6px 10px;
+    }
+    @media  screen and (min-width:500px)and(max-width:600px) {
+     width: 85px;
+     height: 80px;
+    }
+    @media  screen and (min-width:600px)and(max-width:650px) {
+     width: 100px;
+     height: 80px;
+    }
+    @media  screen and (min-width:650px)and(max-width:700px) {
+     width: 130px;
+     height: 80px;
+    }
+    @media  screen and (min-width:700px)and(max-width:768px) {
+     width: 150px;
+     height: 80px;
+    }
+    @media  screen and (min-width:768px)and(max-width:960px) {
+     width: 150px;
+     height: 120px;
+    }
+    @media  screen and (min-width:960px)and(max-width:1200px) {
+     width: 230px;
+     height: 130px;
     }
   &:hover {
     cursor: move;
@@ -101,9 +125,17 @@ export default {
     width: 14em;
 
     @media  screen and (max-width:768px) {
-      width: 3em;
+      width: 4em;
     }
-  }
+    @media  screen and (min-width:768px) and (max-width:960px){
+      width: 6em;
+    }
+    @media  screen and (min-width:960px) and (max-width:1200px){
+      width: 10em;
+    }
+    
+    
+  } 
   &__text {
     display: flex;
     justify-content: flex-start;
@@ -137,9 +169,11 @@ export default {
    
 }
 .v-card__actions{
-  @media screen and (max-width:768px) {
+  @media screen and (max-width:650px) {
     width: 58px;
+    padding: 2px !important;
   }
+  
  
 }
 </style>
